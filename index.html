@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="description" content="TravelGo - Luxury Travel & Tourism Booking Mobile App. Explore, Book, and Experience dream destinations." />
+  <title>TravelGo — Travel & Tourism Booking App</title>
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+
+  <!-- Outer Desktop Showcase Wrapper -->
+  <div class="desktop-wrapper">
+
+    <!-- Dev / Reviewer Quick Jump Dock (Visible on Desktop / Tablets) -->
+    <header class="dev-toolbar" id="dev-toolbar">
+      <div class="dev-brand">
+        <span class="dev-brand-badge">TravelGo UI</span>
+        <span class="dev-brand-title">16-Screen Interactive Figma Prototype</span>
+      </div>
+
+      <div class="dev-controls">
+        <label for="dev-screen-select" class="dev-select-label">Quick Jump:</label>
+        <select id="dev-screen-select" class="dev-screen-select" aria-label="Select screen to view">
+          <option value="screen-welcome">01. Welcome / Splash</option>
+          <option value="screen-login">02. Login / Sign Up</option>
+          <option value="screen-home">03. Home / Discover</option>
+          <option value="screen-explore">04. Explore / Search</option>
+          <option value="screen-search-results">05. Search Results</option>
+          <option value="screen-hotel-details">06. Hotel Details</option>
+          <option value="screen-room-selection">07. Room Selection</option>
+          <option value="screen-traveler-info">08. Traveler Info</option>
+          <option value="screen-payment">09. Payment Checkout</option>
+          <option value="screen-confirmation">10. Confirmation</option>
+          <option value="screen-my-trips">11. My Trips / Bookings</option>
+          <option value="screen-trip-details">12. Trip Itinerary</option>
+          <option value="screen-profile">13. Profile</option>
+          <option value="screen-favorites">14. Favorites</option>
+          <option value="screen-notifications">15. Notifications</option>
+          <option value="screen-review-rating">16. Review & Rating</option>
+        </select>
+
+        <div style="display: flex; gap: 6px;">
+          <button type="button" class="dev-btn dev-btn-primary" id="dev-btn-mobile" title="390x844 Mobile View">
+            <i data-lucide="smartphone"></i> 390px
+          </button>
+          <button type="button" class="dev-btn" id="dev-btn-tablet" title="Tablet View">
+            <i data-lucide="tablet"></i> Tablet
+          </button>
+          <button type="button" class="dev-btn" id="dev-btn-fluid" title="Full Width View">
+            <i data-lucide="monitor"></i> Fluid
+          </button>
+          <button type="button" class="dev-btn" id="dev-btn-reset" title="Reset Demo Data">
+            <i data-lucide="rotate-ccw"></i> Reset
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Simulated Mobile Device Frame (390 x 844 px) -->
+    <main class="device-frame" id="device-frame">
+
+      <!-- Dynamic Island Simulation -->
+      <div class="dynamic-island" aria-hidden="true">
+        <div class="camera-lens"></div>
+      </div>
+
+      <!-- Simulated iOS Status Bar -->
+      <div class="device-status-bar" id="device-status-bar" aria-hidden="true">
+        <span class="status-time" id="device-time">9:41</span>
+        <div class="status-icons">
+          <i data-lucide="signal" style="width: 14px; height: 14px;"></i>
+          <i data-lucide="wifi" style="width: 14px; height: 14px;"></i>
+          <i data-lucide="battery" style="width: 18px; height: 18px;"></i>
+        </div>
+      </div>
+
+      <!-- App Viewport Scroll Container -->
+      <div class="app-viewport" id="app-viewport">
+        <div class="screen-container">
+
+          <!-- ====================================================================
+               SCREEN 01 — WELCOME / SPLASH
+               ==================================================================== -->
+          <section class="screen-view active" id="screen-welcome" aria-label="Welcome Screen">
+            <div class="welcome-hero-container">
+              <img src="assets/images/hero_welcome.jpg" alt="Santorini Caldera" class="welcome-hero-image" />
+              <div class="welcome-hero-gradient"></div>
+              <div class="welcome-logo-bar">
+                <img src="assets/logo/logo-white.svg" alt="TravelGo Logo" class="welcome-logo-img" />
+              </div>
+            </div>
+
+            <div class="welcome-body">
+              <div>
+                <h1 class="welcome-headline">
+                  Explore the World with <span>TravelGo</span>
+                </h1>
+                <p class="welcome-subtext">
+                  Discover breathtaking destinations, luxury stays, and unforgettable experiences curated just for you.
+                </p>
+                <div class="welcome-dots">
+                  <span class="welcome-dot active"></span>
+                  <span class="welcome-dot"></span>
+                  <span class="welcome-dot"></span>
+                </div>
+              </div>
+
+              <div class="welcome-actions">
+                <button type="button" class="btn btn-gradient btn-block btn-lg" id="btn-welcome-start">
+                  Get Started <i data-lucide="arrow-right"></i>
+                </button>
+                <div class="welcome-login-link">
+                  Already have an account? <a href="#screen-login" id="link-welcome-login">Log In</a>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ====================================================================
+               SCREEN 02 — LOGIN / SIGN UP
+               ==================================================================== -->
+          <section class="screen-view" id="screen-login" aria-label="Login and Sign Up Screen">
+            <div class="app-header">
+              <button type="button" class="header-action-btn" data-action="go-back" aria-label="Go back">
+                <i data-lucide="chevron-left"></i>
+              </button>
+              <h2 class="header-title">TravelGo</h2>
+              <div style="width: 40px;"></div>
+            </div>
+
+            <div class="screen-content">
+              <div class="auth-header">
+                <div class="auth-logo-badge">
+                  <i data-lucide="send" style="width: 28px; height: 28px;"></i>
+                </div>
+                <h3 class="auth-title" id="auth-title-text">Welcome Back 👋</h3>
+                <p class="auth-subtitle">Sign in to unlock personalized deals and trips</p>
+              </div>
+
+              <div class="auth-tabs" role="tablist">
+                <button type="button" class="auth-tab-btn active" id="tab-auth-signin" role="tab">Sign In</button>
+                <button type="button" class="auth-tab-btn" id="tab-auth-signup" role="tab">Create Account</button>
+              </div>
+
+              <div class="demo-autofill-banner">
+                <span>⚡ Quick Demo Account available</span>
+                <button type="button" class="demo-autofill-btn" id="btn-autofill-login">Autofill</button>
+              </div>
+
+              <form id="auth-login-form" novalidate>
+                <div class="form-group">
+                  <label for="auth-email-input" class="form-label">Email Address</label>
+                  <div class="input-wrapper has-left-icon">
+                    <span class="input-icon-left"><i data-lucide="mail"></i></span>
+                    <input type="email" id="auth-email-input" class="form-input" placeholder="alex.morgan@travelgo.com" required />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <label for="auth-password-input" class="form-label" style="margin-bottom: 0;">Password</label>
+                    <a href="javascript:void(0)" onclick="TG_UTILS.showToast('Reset email sent to your inbox', 'info')" style="font-size: 12px; color: var(--color-primary-blue); font-weight: 500;">Forgot Password?</a>
+                  </div>
+                  <div class="input-wrapper has-left-icon has-right-icon">
+                    <span class="input-icon-left"><i data-lucide="lock"></i></span>
+                    <input type="password" id="auth-password-input" class="form-input" placeholder="••••••••••••" required />
+                    <button type="button" id="toggle-password-visibility" class="input-icon-right" aria-label="Toggle password visibility">
+                      <i data-lucide="eye"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block btn-lg mt-4" id="btn-auth-submit">
+                  Sign In
+                </button>
+              </form>
+
+              <div class="auth-divider">Or continue with</div>
+
+              <div class="auth-social-row">
+                <button type="button" class="auth-social-btn" id="btn-google-auth">
+                  <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z"/><path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.17 0 9.99 0 12s.45 3.83 1.25 5.42l4.03-3.15z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/></svg>
+                  Google
+                </button>
+                <button type="button" class="auth-social-btn" id="btn-apple-auth">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="#000000"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.4c.66-.82 1.11-1.96.99-3.1-.96.04-2.12.64-2.81 1.45-.6.71-1.13 1.87-1 2.98 1.07.08 2.16-.54 2.82-1.33z"/></svg>
+                  Apple
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <!-- ====================================================================
+               SCREEN 03 — HOME / DISCOVER
+               ==================================================================== -->
+          <section class="screen-view" id="screen-home" aria-label="Home Screen">
+            <div class="home-header">
+              <div class="home-user-info">
+                <div class="home-avatar-wrap" id="home-avatar-btn">
+                  <img src="assets/images/avatar_user.jpg" alt="Alex Morgan" />
+                </div>
+                <div>
+                  <div class="home-greeting-sub">Good morning, 👋</div>
+                  <div class="home-greeting-name">Alex Morgan</div>
+                </div>
+              </div>
+
+              <button type="button" class="header-action-btn" id="home-notif-btn" aria-label="Notifications" style="position: relative;">
+                <i data-lucide="bell"></i>
+                <span class="nav-badge" id="home-notif-badge">2</span>
+              </button>
+            </div>
+
+            <div class="screen-content has-bottom-nav">
+              <!-- Search Destination Trigger -->
+              <div class="search-bar-trigger" id="home-search-trigger">
+                <i data-lucide="search" class="search-icon"></i>
+                <span class="search-placeholder">Where do you want to explore?</span>
+                <span class="filter-icon-btn"><i data-lucide="sliders-horizontal" style="width: 16px; height: 16px;"></i></span>
+              </div>
+
+              <!-- Category Pills -->
+              <div class="category-pills mt-3" id="home-category-pills">
+                <button type="button" class="category-pill active" data-cat="all">
+                  <i data-lucide="sparkles"></i> All
+                </button>
+                <button type="button" class="category-pill" data-cat="hotels">
+                  <i data-lucide="building"></i> Hotels
+                </button>
+                <button type="button" class="category-pill" data-cat="villas">
+                  <i data-lucide="home"></i> Villas
+                </button>
+                <button type="button" class="category-pill" data-cat="resorts">
+                  <i data-lucide="palmtree"></i> Resorts
+                </button>
+                <button type="button" class="category-pill" data-cat="cruises">
+                  <i data-lucide="ship"></i> Cruises
+                </button>
+              </div>
+
+              <!-- Special Promo Banner -->
+              <div class="home-promo-banner" id="home-promo-banner">
+                <span class="home-promo-tag">Featured Offer</span>
+                <h3 class="home-promo-title">Santorini Autumn Getaway</h3>
+                <p class="home-promo-desc">Save up to 25% on luxury caldera view suites and cave villas.</p>
+                <button type="button" class="btn btn-sm btn-outline-white">Explore Deal →</button>
+              </div>
+
+              <!-- Featured Destinations Carousel -->
+              <div class="section-header">
+                <h3 class="section-title">Popular Destinations</h3>
+                <span class="section-link" onclick="tgRouter.navigateTo('screen-explore')">View all <i data-lucide="chevron-right"></i></span>
+              </div>
+              <div class="destinations-scroll" id="home-destinations-list">
+                <!-- Dynamically populated -->
+              </div>
+
+              <!-- Popular Stays / Hotels Section -->
+              <div class="section-header">
+                <h3 class="section-title">Handpicked Luxury Stays</h3>
+                <span class="section-link" onclick="tgRouter.navigateTo('screen-search-results')">See 18 stays <i data-lucide="chevron-right"></i></span>
+              </div>
+              <div id="home-popular-hotels">
+                <!-- Dynamically populated -->
+              </div>
+            </div>
+          </section>
+
+          <!-- ====================================================================
+               SCREEN 04 — EXPLORE / SEARCH DESTINATION
+               ==================================================================== -->
+          <section class="screen-view" id="screen-explore" aria-label="Explore and Search Screen">
+            <div class="app-header">
+              <button type="button" class="header-action-btn" data-action="go-back" aria-label="Go back">
+                <i data-lucide="chevron-left"></i>
+              </button>
+              <h2 class="header-title">Find Your Stay</h2>
+              <div style="width: 40px;"></div>
+            </div>
+
+            <div class="screen-content has-bottom-nav">
+              <!-- Search Query Input -->
+              <div class="form-group mt-2">
+                <div class="input-wrapper has-left-icon has-right-icon">
+                  <span class="input-icon-left"><i data-lucide="search"></i></span>
+                  <input type="text" id="explore-search-input" class="form-input" placeholder="Search destination (e.g. Santorini, Bali...)" value="Santorini, Greece" />
+                  <button type="button" class="input-icon-right" onclick="document.getElementById('explore-search-input').value = ''" aria-label="Clear search">
+                    <i data-lucide="x"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Search Configuration Card -->
+              <div class="search-card-box">
+                <div class="search-field-row" onclick="TG_UTILS.showToast('Select destination location', 'info')">
+                  <div class="search-field-icon"><i data-lucide="map-pin"></i></div>
+                  <div class="search-field-info">
+                    <div class="search-field-label">Destination</div>
+                    <div class="search-field-value">Santorini, Greece</div>
+                  </div>
+                </div>
+
+                <div class="search-field-row" onclick="TG_UTILS.showToast('Travel dates: Oct 18 - Oct 23 (5 Nights)', 'info')">
+                  <div class="search-field-icon"><i data-lucide="calendar"></i></div>
+                  <div class="search-field-info">
+                    <div class="search-field-label">Dates (5 Nights)</div>
+                    <div class="search-field-value">Oct 18, 2026 – Oct 23, 2026</div>
+                  </div>
+                </div>
+
+                <div class="search-field-row" onclick="TG_UTILS.showToast('Guests configured: 2 Adults, 1 Suite', 'info')">
+                  <div class="search-field-icon"><i data-lucide="users"></i></div>
+                  <div class="search-field-info">
+                    <div class="search-field-label">Travelers & Rooms</div>
+                    <div class="search-field-value">2 Adults • 1 Suite</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Trending Tags -->
+              <h4 style="font-size: 14px; font-weight: 700; color: var(--color-text-primary); margin-bottom: 8px;">
+                Trending in Santorini
+              </h4>
+              <div class="tag-cloud">
+                <button type="button" class="tag-chip" data-tag="Oia Caldera">✨ Oia Caldera</button>
+                <button type="button" class="tag-chip" data-tag="Imerovigli Sunsets">🌅 Imerovigli Sunsets</button>
+                <button type="button" class="tag-chip" data-tag="Private Cave Pool">🏊 Private Cave Pool</button>
+                <button type="button" class="tag-chip" data-tag="Ammoudi Bay">⛵ Ammoudi Bay</button>
+                <button type="button" class="tag-chip" data-tag="Akrotiri">🏛️ Akrotiri</button>
+              </div>
+
+              <!-- Filter Preferences -->
+              <h4 style="font-size: 14px; font-weight: 700; color: var(--color-text-primary); margin-bottom: 8px;">
+                Popular Amenities
+              </h4>
+              <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px;">
+                <label style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--color-text-secondary); cursor: pointer;">
+                  <input type="checkbox" checked style="accent-color: var(--color-primary-blue); width: 18px; height: 18px;" />
+                  Infinity Swimming Pool & Ocean View
+                </label>
+                <label style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--color-text-secondary); cursor: pointer;">
+                  <input type="checkbox" checked style="accent-color: var(--color-primary-blue); width: 18px; height: 18px;" />
+                  Complimentary Gourmet Breakfast
+                </label>
+                <label style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--color-text-secondary); cursor: pointer;">
+                  <input type="checkbox" checked style="accent-color: var(--color-primary-blue); width: 18px; height: 18px;" />
+                  Free Cancellation (48 hrs prior)
+                </label>
+              </div>
+
+              <button type="button" class="btn btn-primary btn-block btn-lg" id="btn-explore-search">
+                <i data-lucide="search"></i> Search Available Stays
+              </button>
+            </div>
+          </section>
+
+          <!-- ====================================================================
+               SCREEN 05 — SEARCH RESULTS
+               ==================================================================== -->
+          <section class="screen-view" id="screen-search-results" aria-label="Search Results Screen">
+            <div class="app-header">
+              <button type="button" class="header-action-btn" data-action="go-back" aria-label="Go back">
+                <i data-lucide="chevron-left"></i>
+              </button>
+              <div>
+                <h2 class="header-title" style="font-size: 16px;">Santorini, Greece</h2>
+                <div style="font-size: 11px; color: var(--color-text-secondary); text-align: center;">Oct 18–23 • 2 Guests</div>
+              </div>
+              <button type="button" class="header-action-btn" onclick="tgRouter.navigateTo('screen-explore')" aria-label="Edit search">
+                <i data-lucide="sliders-horizontal"></i>
+              </button>
+            </div>
+
+            <div class="screen-content">
+              <!-- Filter / Sort Chips -->
+              <div class="results-filter-bar">
+                <button type="button" class="filter-chip active" data-sort="top-rated">
+                  <i data-lucide="star"></i> Top Rated
+                </button>
+                <button type="button" class="filter-chip" data-sort="price-low">
+                  <i data-lucide="arrow-down-up"></i> Price: Low to High
+                </button>
+                <button type="button" class="filter-chip" data-sort="5-stars">
+                  <i data-lucide="award"></i> 5 Stars Only
+                </button>
+                <button type="button" class="filter-chip" data-sort="free-cancel">
+                  <i data-lucide="check"></i> Free Cancellation
+                </button>
+              </div>
+
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                <span id="results-count-text" style="font-size: 13px; font-weight: 600; color: var(--color-text-primary);">
+                  6 luxury properties found
+                </span>
+                <span style="font-size: 12px; color: var(--color-primary-blue); font-weight: 500; cursor: pointer;">
+                  <i data-lucide="map" style="width: 14px; height: 14px; display: inline;"></i> Map View
+                </span>
+              </div>
+
+              <!-- Hotel Cards List -->
+              <div id="search-results-list">
+                <!-- Dynamically populated -->
+              </div>
+            </div>
+          </section>
+
+          <!-- ====================================================================
+               SCREEN 06 — HOTEL DETAILS
+               ==================================================================== -->
+          <section class="screen-view" id="screen-hotel-details" aria-label="Hotel Details Screen">
+            <div class="hotel-gallery-wrap">
+              <img id="hotel-detail-hero-img" src="assets/images/hotel_astra.jpg" alt="Hotel Hero" class="hotel-gallery-img" />
+              
+              <!-- Floating Header Actions -->
+              <div style="position: absolute; top: 44px; left: 16px; right: 16px; display: flex; justify-content: space-between; z-index: 20;">
+                <button type="button" class="header-action-btn btn-blur" data-action="go-back" aria-label="Go back">
+                  <i data-lucide="chevron-left"></i>
+                </button>
+                <div style="display: flex; gap: 8px;">
+                  <button type="button" class="header-action-btn btn-blur" onclick="TG_UTILS.showToast('Link copied to clipboard!', 'info')" aria-label="Share">
+                    <i data-lucide="share-2"></i>
+                  </button>
+                  <button type="button" class="header-action-btn btn-blur" id="hotel-detail-fav-btn" aria-label="Favorite">
+                    <i data-lucide="heart"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div class="gallery-counter-badge">
+                <i data-lucide="image" style="width: 13px; height: 13px;"></i> 1 / 3
+              </div>
+            </div>
+
+            <div class="screen-content has-bottom-cta">
+              <div class="hotel-details-header">
+                <h2 id="hotel-detail-name" style="font-size: 20px; font-weight: 800; color: var(--color-text-primary); margin-bottom: 4px;">
+                  Astra Suites Santorini
+                </h2>
+                <div style="display: flex; align-items: center; gap: 4px; font-size: 13px; color: var(--color-text-secondary); margin-bottom: 8px;">
+                  <i data-lucide="map-pin" style="width: 14px; height: 14px; color: var(--color-primary-blue);"></i>
+                  <span id="hotel-detail-location">Imerovigli • 0.3 km from Caldera cliff path</span>
+                </div>
+                <div class="badge-rating" id="hotel-detail-rating">
+                  <i data-lucide="star"></i> 4.9 (428 reviews) • Exceptional
+                </div>
+              </div>
+
+              <!-- About & Description -->
+              <h4 style="font-size: 15px; font-weight: 700; color: var(--color-text-primary); margin: 16px 0 6px;">
+                About this Property
+              </h4>
+              <p id="hotel-detail-description" style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.6;">
+                Perched atop the tranquil volcanic cliffs of Imerovigli, Astra Suites offers breathtaking panoramic views of the Aegean caldera, Aegean sunset, and the historic Skaros Rock.
+              </p>
+
+              <!-- Top Amenities -->
+              <h4 style="font-size: 15px; font-weight: 700; color: var(--color-text-primary); margin: 20px 0 10px;">
+                Property Amenities
+              </h4>
+              <div class="amenities-grid" id="hotel-detail-amenities-grid">
+                <!-- Dynamically populated -->
+              </div>
+
+              <!-- Location Preview -->
+              <h4 style="font-size: 15px; font-weight: 700; color: var(--color-text-primary); margin: 16px 0 6px;">
+                Location & Surroundings
+              </h4>
+              <div class="mini-map-card">
+                <div class="map-pin-pulse"><i data-lucide="map-pin"></i></div>
+                <div style="position: absolute; bottom: 8px; left: 12px; font-size: 11px; background: rgba(255,255,255,0.9); padding: 2px 8px; border-radius: 4px; font-weight: 600;">
+                  Imerovigli Caldera Cliffside, Santorini
+                </div>
+              </div>
+
+              <!-- Reviews Highlight -->
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 18px;">
+                <h4 style="font-size: 15px; font-weight: 700; color: var(--color-text-primary);">Guest Reviews (428)</h4>
+                <a href="#screen-review-rating" onclick="tgRouter.navigateTo('screen-review-rating')" style="font-size: 12px; color: var(--color-primary-blue); font-weight: 600;">Write Review</a>
+              </div>
+              <div id="hotel-detail-reviews-snippet">
+                <!-- Dynamically populated -->
+              </div>
+            </div>
+
+            <!-- Sticky Bottom Action Bar -->
+            <div class="bottom-action-bar">
+              <div class="action-bar-price">
+                <span class="action-bar-label">Price starting from</span>
+                <div class="action-bar-value" id="hotel-detail-price">$380 <span>/ night</span></div>
+              </div>
+              <button type="button" class="btn btn-primary btn-lg" id="btn-hotel-select-room" style="flex: 1; max-width: 190px;">
+                Select Room <i data-lucide="chevron-right"></i>
+              </button>
+            </div>
+          </section>
+
+          <!-- ====================================================================
+               SCREEN 07 — ROOM / PACKAGE SELECTION
+               ==================================================================== -->
+          <section class="screen-view" id="screen-room-selection" aria-label="Room Selection Screen">
+            <div class="app-header">
+              <button type="button" class="header-action-btn" data-action="go-back" aria-label="Go back">
+                <i data-lucide="chevron-left"></i>
+              </button>
+              <div>
+                <h2 class="header-title" style="font-size: 16px;">Select Your Suite</h2>
+                <div id="room-screen-hotel-title" style="font-size: 11px; color: var(--color-text-secondary); text-align: center;">Astra Suites Santorini</div>
+              </div>
+              <div style="width: 40px;"></div>
+            </div>
+
+            <div class="screen-content has-bottom-cta">
+              <!-- Stepper -->
+              <div class="checkout-stepper">
+                <div class="stepper-line"></div>
+                <div class="checkout-step active">
+                  <div class="step-circle">1</div>
+                  <span class="step-label">Suite</span>
+                </div>
+                <div class="checkout-step">
+                  <div class="step-circle">2</div>
+                  <span class="step-label">Traveler</span>
+                </div>
+                <div class="checkout-step">
+                  <div class="step-circle">3</div>
+                  <span class="step-label">Payment</span>
+                </div>
+              </div>
+
+              <div id="rooms-list-container">
+                <!-- Dynamically populated with 3 Luxury Room cards -->
+              </div>
+            </div>
+
+            <!-- Bottom Action Bar -->
+            <div class="bottom-action-bar">
+              <div class="action-bar-price">
+                <span class="action-bar-label">Total (5 Nights)</span>
+                <div class="action-bar-value" id="room-selected-price-display">$1,900</div>
+              </div>
+              <button type="button" class="btn btn-primary btn-lg" id="btn-room-continue" style="flex: 1; max-width: 200px;">
+                Continue <i data-lucide="arrow-right"></i>
+              </button>
+            </div>
+          </section>
+
+          <!-- ====================================================================
+               SCREEN 08 — TRAVELER INFORMATION
+               ==================================================================== -->
+          <section class="screen-view" id="screen-traveler-info" aria-label="Traveler Information Screen">
+            <div class="app-header">
+              <button type="button" class="header-action-btn" data-action="go-back" aria-label="Go back">
+                <i data-lucide="chevron-left"></i>
+              </button>
+              <h2 class="header-title">Traveler Information</h2>
+              <div style="width: 40px;"></div>
+            </div>
+
+            <div class="screen-content has-bottom-cta">
+              <!-- Stepper -->
+              <div class="checkout-stepper">
+                <div class="stepper-line"></div>
+                <div class="checkout-step completed">
+                  <div class="step-circle">✓</div>
+                  <span class="step-label">Suite</span>
+                </div>
+                <div class="checkout-step active">
+                  <div class="step-circle">2</div>
+                  <span class="step-label">Traveler</span>
+                </div>
+                <div class="checkout-step">
+                  <div class="step-circle">3</div>
+                  <span class="step-label">Payment</span>
+                </div>
+              </div>
+
+              <!-- Booking Summary Mini Card -->
+              <div class="booking-summary-banner" id="traveler-screen-summary">
+                <!-- Populated dynamically -->
+              </div>
+
+              <!-- Traveler Form -->
+              <form id="traveler-info-form" novalidate>
+                <div class="form-group">
+                  <label class="form-label">Title / Salutation</label>
+                  <div style="display: flex; gap: 8px;">
+                    <button type="button" class="btn btn-sm btn-primary" style="flex: 1;">Mr.</button>
+                    <button type="button" class="btn btn-sm btn-secondary" style="flex: 1;">Ms.</button>
+                    <button type="button" class="btn btn-sm btn-secondary" style="flex: 1;">Mrs.</button>
+                    <button type="button" class="btn btn-sm btn-secondary" style="flex: 1;">Dr.</button>
+                  </div>
+                </div>
+
+                <div style="display: flex; gap: 12px;">
+                  <div class="form-group" style="flex: 1;">
+                    <label for="input-traveler-first-name" class="form-label">First Name *</label>
+                    <div class="input-wrapper">
+                      <input type="text" id="input-traveler-first-name" class="form-input" placeholder="Alex" required />
+                    </div>
+                  </div>
+
+                  <div class="form-group" style="flex: 1;">
+                    <label for="input-traveler-last-name" class="form-label">Last Name *</label>
+                    <div class="input-wrapper">
+                      <input type="text" id="input-traveler-last-name" class="form-input" placeholder="Morgan" required />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="input-traveler-email" class="form-label">Email Address (for confirmation & voucher) *</label>
+                  <div class="input-wrapper has-left-icon">
+                    <span class="input-icon-left"><i data-lucide="mail"></i></span>
+                    <input type="email" id="input-traveler-email" class="form-input" placeholder="alex.morgan@example.com" required />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="input-traveler-phone" class="form-label">Mobile Phone Number *</label>
+                  <div class="input-wrapper has-left-icon">
+                    <span class="input-icon-left"><i data-lucide="phone"></i></span>
+                    <input type="tel" id="input-traveler-phone" class="form-input" placeholder="+1 (555) 382-9104" required />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Special Requests (Optional)</label>
+                  <div style="display: flex; flex-direction: column; gap: 8px;">
+                    <label style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--color-text-secondary); cursor: pointer;">
+                      <input type="checkbox" checked style="accent-color: var(--color-primary-blue);" />
+                      Late check-in requested (arrival after 18:00)
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--color-text-secondary); cursor: pointer;">
+                      <input type="checkbox" checked style="accent-color: var(--color-primary-blue);" />
+                      Quiet room overlooking the caldera
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--color-text-secondary); cursor: pointer;">
+                      <input type="checkbox" style="accent-color: var(--color-primary-blue);" />
+                      Airport private limousine shuttle pickup ($85)
+                    </label>
+                  </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block btn-lg mt-3" id="btn-traveler-continue">
+                  Continue to Payment <i data-lucide="arrow-right"></i>
+                </button>
+              </form>
+            </div>
+          </section>
+
+          <!-- ====================================================================
+               SCREEN 09 — PAYMENT
+               ==================================================================== -->
+          <section class="screen-view" id="screen-payment" aria-label="Payment Screen">
+            <div class="app-header">
+              <button type="button" class="header-action-btn" data-action="go-back" aria-label="Go back">
+                <i data-lucide="chevron-left"></i>
+              </button>
+              <h2 class="header-title">Payment</h2>
+              <div style="width: 40px;"></div>
+            </div>
+
+            <div class="screen-content has-bottom-cta">
+              <!-- Stepper -->
+              <div class="checkout-stepper">
+                <div class="stepper-line"></div>
+                <div class="checkout-step completed">
+                  <div class="step-circle">✓</div>
+                  <span class="step-label">Suite</span>
+                </div>
+                <div class="checkout-step completed">
+                  <div class="step-circle">✓</div>
+                  <span class="step-label">Traveler</span>
+                </div>
+                <div class="checkout-step active">
+                  <div class="step-circle">3</div>
+                  <span class="step-label">Payment</span>
+                </div>
+              </div>
+
+              <!-- Demo Disclaimer Notice -->
+              <div style="background: rgba(23, 105, 255, 0.08); border: 1px solid rgba(23, 105, 255, 0.2); border-radius: var(--radius-md); padding: 10px 14px; margin-bottom: 16px; font-size: 12px; color: var(--color-primary-blue); display: flex; align-items: center; gap: 8px;">
+                <i data-lucide="shield-check" style="flex-shrink: 0;"></i>
+                <span><strong>Demo Simulation:</strong> No actual charges will be processed. Use the test autofill below.</span>
+              </div>
+
+              <!-- Price Breakdown Card -->
+              <div style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 16px; margin-bottom: 20px;">
+                <h4 style="font-size: 14px; font-weight: 700; margin-bottom: 12px; color: var(--color-text-primary);">Price Breakdown</h4>
+                <div style="display: flex; justify-content: space-between; font-size: 13px; color: var(--color-text-secondary); margin-bottom: 8px;">
+                  <span>5 Nights Stay</span>
+                  <span id="payment-subtotal" style="font-weight: 600; color: var(--color-text-primary);">$1,900</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-size: 13px; color: var(--color-text-secondary); margin-bottom: 8px;">
+                  <span>Local VAT & Tourism Tax (12%)</span>
+                  <span id="payment-taxes" style="font-weight: 600; color: var(--color-text-primary);">$228</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-size: 13px; color: var(--color-success); margin-bottom: 8px;">
+                  <span>Promo Voucher Discount</span>
+                  <span id="payment-discount" style="font-weight: 600;">$0</span>
+                </div>
+
+                <!-- Promo Input -->
+                <div style="display: flex; gap: 8px; margin: 12px 0 8px;">
+                  <input type="text" id="pay-promo-input" class="form-input" placeholder="Code: TRAVELGO10" style="border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: 8px 12px; font-size: 12px;" />
+                  <button type="button" class="btn btn-sm btn-secondary" id="btn-apply-promo">Apply</button>
+                </div>
+
+                <div style="border-top: 1px dashed var(--color-border); padding-top: 12px; margin-top: 8px; display: flex; justify-content: space-between; align-items: center;">
+                  <strong style="font-size: 15px; color: var(--color-text-primary);">Total Amount</strong>
+                  <strong id="payment-total" style="font-size: 18px; color: var(--color-primary-blue); font-weight: 800;">$2,128</strong>
+                </div>
+              </div>
+
+              <!-- Payment Method Selection -->
+              <h4 style="font-size: 14px; font-weight: 700; margin-bottom: 10px; color: var(--color-text-primary);">Payment Method</h4>
+              <div class="payment-tabs">
+                <div class="payment-tab active" data-method="card">
+                  <i data-lucide="credit-card"></i>
+                  <span>Card</span>
+                </div>
+                <div class="payment-tab" data-method="apple">
+                  <i data-lucide="smartphone"></i>
+                  <span>Apple Pay</span>
+                </div>
+                <div class="payment-tab" data-method="paypal">
+                  <i data-lucide="wallet"></i>
+                  <span>PayPal</span>
+                </div>
+              </div>
+
+              <!-- Credit Card Form Section -->
+              <div id="card-payment-form-section">
+                <!-- Card Graphic Preview -->
+                <div class="credit-card-preview">
+                  <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-weight: 800; font-size: 16px; letter-spacing: -0.5px;">TravelGo VIP</span>
+                    <span style="font-size: 12px; font-weight: 600; opacity: 0.9;">VISA</span>
+                  </div>
+                  <div class="card-chip"></div>
+                  <div class="card-num-preview">•••• •••• •••• 4242</div>
+                  <div class="card-foot-preview">
+                    <div>
+                      <div style="opacity: 0.7; font-size: 9px;">CARDHOLDER</div>
+                      <div style="font-weight: 600;">ALEX MORGAN</div>
+                    </div>
+                    <div>
+                      <div style="opacity: 0.7; font-size: 9px;">EXPIRES</div>
+                      <div style="font-weight: 600;">10/28</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div style="display: flex; justify-content: flex-end; margin-bottom: 12px;">
+                  <button type="button" class="btn btn-sm btn-subtle" id="btn-autofill-card">
+                    ⚡ Autofill Test Card
+                  </button>
+                </div>
+
+                <form id="payment-checkout-form" novalidate>
+                  <div class="form-group">
+                    <label for="pay-card-name" class="form-label">Name on Card</label>
+                    <div class="input-wrapper">
+                      <input type="text" id="pay-card-name" class="form-input" placeholder="Alex Morgan" value="Alex Morgan" required />
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="pay-card-number" class="form-label">Card Number</label>
+                    <div class="input-wrapper has-left-icon">
+                      <span class="input-icon-left"><i data-lucide="credit-card"></i></span>
+                      <input type="text" id="pay-card-number" class="form-input" placeholder="4242 4242 4242 4242" value="4242 4242 4242 4242" required />
+                    </div>
+                  </div>
+
+                  <div style="display: flex; gap: 12px;">
+                    <div class="form-group" style="flex: 1;">
+                      <label for="pay-card-expiry" class="form-label">Expiry (MM/YY)</label>
+                      <div class="input-wrapper">
+                        <input type="text" id="pay-card-expiry" class="form-input" placeholder="10/28" value="10/28" required />
+                      </div>
+                    </div>
+
+                    <div class="form-group" style="flex: 1;">
+                      <label for="pay-card-cvv" class="form-label">CVV</label>
+                      <div class="input-wrapper">
+                        <input type="password" id="pay-card-cvv" class="form-input" placeholder="849" value="849" maxlength="4" required />
+                      </div>
+                    </div>
+                  </div>
+
+                  <button type="submit" class="btn btn-primary btn-block btn-lg mt-2" id="btn-pay-submit">
+                    Pay $2,128 & Confirm Booking
+                  </button>
+                </form>
+              </div>
+            </div>
+          </section>
+
+          <!-- ====================================================================
+               SCREEN 10 — BOOKING CONFIRMATION
+               ==================================================================== -->
+          <section class="screen-view" id="screen-confirmation" aria-label="Booking Confirmation Screen">
+            <div class="screen-content">
+              <div class="confirmation-hero">
+                <div class="celebrate-icon-box">
+                  <i data-lucide="check" style="width: 44px; height: 44px;"></i>
+                </div>
+                <h2 style="font-size: 24px; font-weight: 800; color: var(--color-text-primary); margin-bottom: 6px;">
+                  Booking Confirmed! 🎉
+                </h2>
+                <p style="font-size: 13px; color: var(--color-text-secondary); max-width: 300px; margin: 0 auto;">
+                  Pack your bags, Alex! Your luxury reservation in Santorini is confirmed.
+                </p>
+
+                <!-- Booking Reference Code -->
+                <div class="ref-code-box">
+                  <div>
+                    <div style="font-size: 11px; color: var(--color-text-secondary); text-transform: uppercase;">Booking Reference</div>
+                    <div class="ref-code-text" id="confirm-ref-code">#TG-849201</div>
+                  </div>
+                  <button type="button" class="btn btn-sm btn-subtle" id="btn-copy-ref">
+                    <i data-lucide="copy"></i> Copy
+                  </button>
+                </div>
+              </div>
+
+              <!-- Summary Card -->
+              <div style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 18px; margin-bottom: 24px;">
+                <h4 id="confirm-hotel-name" style="font-size: 16px; font-weight: 800; color: var(--color-text-primary); margin-bottom: 2px;">
+                  Astra Suites Santorini
+                </h4>
+                <div id="confirm-destination" style="font-size: 12px; color: var(--color-text-secondary); margin-bottom: 14px;">
+                  Santorini, Greece
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 10px; font-size: 13px; border-top: 1px solid var(--color-border-subtle); padding-top: 12px;">
+                  <div style="display: flex; justify-content: space-between;">
+                    <span style="color: var(--color-text-secondary);">Dates:</span>
+                    <strong id="confirm-dates" style="color: var(--color-text-primary);">Oct 18 – Oct 23, 2026 (5 Nights)</strong>
+                  </div>
+                  <div style="display: flex; justify-content: space-between;">
+                    <span style="color: var(--color-text-secondary);">Suite Type:</span>
+                    <strong id="confirm-room-name" style="color: var(--color-text-primary);">Deluxe Caldera View Suite</strong>
+                  </div>
+                  <div style="display: flex; justify-content: space-between;">
+                    <span style="color: var(--color-text-secondary);">Guest:</span>
+                    <strong id="confirm-traveler-name" style="color: var(--color-text-primary);">Alex Morgan</strong>
+                  </div>
+                  <div style="display: flex; justify-content: space-between; border-top: 1px solid var(--color-border-subtle); padding-top: 10px;">
+                    <span style="color: var(--color-text-primary); font-weight: 600;">Amount Paid:</span>
+                    <strong id="confirm-total-price" style="color: var(--color-primary-blue); font-size: 16px;">$2,128</strong>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Action CTAs -->
+              <div style="display: flex; flex-direction: column; gap: 10px;">
+                <button type="button" class="btn btn-primary btn-block btn-lg" id="btn-confirm-my-trips">
+                  <i data-lucide="plane"></i> View in My Trips
+                </button>
+                <button type="button" class="btn btn-secondary btn-block" id="btn-confirm-itinerary">
+                  <i data-lucide="map"></i> View Detailed Itinerary
+                </button>
+                <button type="button" class="btn btn-subtle btn-block" onclick="TG_UTILS.showToast('Voucher sent to your email & downloaded!', 'success')">
+                  <i data-lucide="download"></i> Download E-Ticket / Receipt
+                </button>
+                <button type="button" class="btn btn-block" id="btn-confirm-home" style="color: var(--color-text-secondary); font-size: 13px;">
+                  Back to Discover
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <!-- ====================================================================
+               SCREEN 11 — MY TRIPS / BOOKINGS
+               ==================================================================== -->
+          <section class="screen-view" id="screen-my-trips" aria-label="My Trips Screen">
+            <div class="app-header">
+              <button type="button" class="header-action-btn" data-action="go-back" aria-label="Go back">
+                <i data-lucide="chevron-left"></i>
+              </button>
+              <h2 class="header-title">My Bookings</h2>
+              <div style="width: 40px;"></div>
+            </div>
+
+            <div class="screen-content has-bottom-nav">
+              <!-- Segmented Tabs -->
+              <div class="trips-tabs">
+                <button type="button" class="trip-tab-btn active" id="tab-trips-upcoming">Upcoming</button>
+                <button type="button" class="trip-tab-btn" id="tab-trips-completed">Completed</button>
+              </div>
+
+              <!-- Trips List Container -->
+              <div id="my-trips-list-container">
+                <!-- Dynamically populated -->
+              </div>
+            </div>
+          </section>
+
+          <!-- ====================================================================
+               SCREEN 12 — TRIP DETAILS / ITINERARY
+               ==================================================================== -->
+          <section class="screen-view" id="screen-trip-details" aria-label="Trip Details and Itinerary Screen">
+            <div class="app-header">
+              <button type="button" class="header-action-btn" data-action="go-back" aria-label="Go back">
+                <i data-lucide="chevron-left"></i>
+              </button>
+              <h2 class="header-title">Trip Itinerary</h2>
+              <button type="button" class="header-action-btn" onclick="TG_UTILS.showToast('Itinerary link copied!', 'info')" aria-label="Share">
+                <i data-lucide="share-2"></i>
+              </button>
+            </div>
+
+            <div class="screen-content">
+              <!-- Hotel Summary Card -->
+              <div style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 16px; margin-bottom: 20px;">
+                <span class="badge badge-success" id="itinerary-ref-badge" style="margin-bottom: 6px;">
+                  Confirmed • Ref #TG-849201
+                </span>
+                <h3 id="itinerary-hotel-name" style="font-size: 18px; font-weight: 800; color: var(--color-text-primary);">
+                  Astra Suites Santorini
+                </h3>
+                <div id="itinerary-dates" style="font-size: 13px; color: var(--color-text-secondary); margin: 6px 0 14px;">
+                  Oct 18, 2026 – Oct 23, 2026 (5 Nights)
+                </div>
+
+                <!-- Quick actions -->
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; border-top: 1px solid var(--color-border-subtle); padding-top: 12px;">
+                  <button type="button" class="btn btn-secondary btn-sm" style="flex-direction: column; padding: 8px 4px; font-size: 10px;" onclick="TG_UTILS.showToast('E-Voucher opened', 'info')">
+                    <i data-lucide="ticket"></i> Voucher
+                  </button>
+                  <button type="button" class="btn btn-secondary btn-sm" style="flex-direction: column; padding: 8px 4px; font-size: 10px;" onclick="TG_UTILS.showToast('Opening Google Maps navigation', 'info')">
+                    <i data-lucide="navigation"></i> Directions
+                  </button>
+                  <button type="button" class="btn btn-secondary btn-sm" style="flex-direction: column; padding: 8px 4px; font-size: 10px;" onclick="TG_UTILS.showToast('Calling concierge: +30 22860 23641', 'info')">
+                    <i data-lucide="phone-call"></i> Call Hotel
+                  </button>
+                  <button type="button" class="btn btn-secondary btn-sm" style="flex-direction: column; padding: 8px 4px; font-size: 10px;" onclick="TG_UTILS.showToast('Host chat connected', 'info')">
+                    <i data-lucide="message-circle"></i> Message
+                  </button>
+                </div>
+              </div>
+
+              <!-- Check-In / Check-Out Timeline Cards -->
+              <div style="display: flex; gap: 12px; margin-bottom: 24px;">
+                <div style="flex: 1; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 12px;">
+                  <div style="font-size: 11px; color: var(--color-text-muted); text-transform: uppercase; font-weight: 600;">Check-In</div>
+                  <div style="font-size: 14px; font-weight: 700; color: var(--color-text-primary); margin-top: 2px;">Oct 18 • 15:00</div>
+                  <div style="font-size: 11px; color: var(--color-success); margin-top: 2px;">Guaranteed Arrival</div>
+                </div>
+                <div style="flex: 1; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 12px;">
+                  <div style="font-size: 11px; color: var(--color-text-muted); text-transform: uppercase; font-weight: 600;">Check-Out</div>
+                  <div style="font-size: 14px; font-weight: 700; color: var(--color-text-primary); margin-top: 2px;">Oct 23 • 11:00</div>
+                  <div style="font-size: 11px; color: var(--color-text-secondary); margin-top: 2px;">Express Checkout</div>
+                </div>
+              </div>
+
+              <!-- Day-by-Day Itinerary -->
+              <h4 style="font-size: 16px; font-weight: 800; color: var(--color-text-primary); margin-bottom: 16px;">
+                Day-by-Day Experience Schedule
+              </h4>
+              <div id="itinerary-days-container">
+                <!-- Dynamically populated with Day 1 to 6 schedule -->
+              </div>
+            </div>
+          </section>
+
+          <!-- ====================================================================
+               SCREEN 13 — PROFILE
+               ==================================================================== -->
+          <section class="screen-view" id="screen-profile" aria-label="Profile Screen">
+            <div class="app-header">
+              <button type="button" class="header-action-btn" data-action="go-back" aria-label="Go back">
+                <i data-lucide="chevron-left"></i>
+              </button>
+              <h2 class="header-title">My Profile</h2>
+              <button type="button" class="header-action-btn" onclick="TG_UTILS.showToast('Profile editing enabled', 'info')" aria-label="Edit Profile">
+                <i data-lucide="edit-3"></i>
+              </button>
+            </div>
+
+            <div class="screen-content has-bottom-nav">
+              <!-- Profile Card -->
+              <div class="profile-card">
+                <div class="profile-avatar-wrap">
+                  <img src="assets/images/avatar_user.jpg" alt="Alex Morgan" />
+                </div>
+                <h3 id="profile-name" style="font-size: 18px; font-weight: 800; color: var(--color-text-primary);">
+                  Alex Morgan
+                </h3>
+                <div id="profile-email" style="font-size: 13px; color: var(--color-text-secondary); margin-bottom: 8px;">
+                  alex.morgan@example.com
+                </div>
+                <div style="display: flex; justify-content: center; gap: 8px;">
+                  <span class="badge badge-primary" id="profile-tier-badge">Gold Explorer 🌟</span>
+                  <span class="badge badge-coral" id="profile-points-display">4,250 Points</span>
+                </div>
+
+                <div class="profile-stats-row">
+                  <div>
+                    <div id="profile-trips-count" style="font-size: 18px; font-weight: 800; color: var(--color-text-primary);">12</div>
+                    <div style="font-size: 11px; color: var(--color-text-secondary);">Trips</div>
+                  </div>
+                  <div>
+                    <div id="profile-reviews-count" style="font-size: 18px; font-weight: 800; color: var(--color-text-primary);">8</div>
+                    <div style="font-size: 11px; color: var(--color-text-secondary);">Reviews</div>
+                  </div>
+                  <div>
+                    <div id="profile-favs-count" style="font-size: 18px; font-weight: 800; color: var(--color-text-primary);">3</div>
+                    <div style="font-size: 11px; color: var(--color-text-secondary);">Saved</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Menu Groups -->
+              <div class="profile-menu-group">
+                <div class="profile-menu-item" onclick="TG_UTILS.showToast('Personal info loaded', 'info')">
+                  <div style="display: flex; align-items: center;">
+                    <div class="profile-menu-icon"><i data-lucide="user"></i></div>
+                    <div>
+                      <div style="font-size: 14px; font-weight: 600; color: var(--color-text-primary);">Personal Information</div>
+                      <div style="font-size: 12px; color: var(--color-text-secondary);">Passport, phone & contact details</div>
+                    </div>
+                  </div>
+                  <i data-lucide="chevron-right" style="color: var(--color-text-muted);"></i>
+                </div>
+
+                <div class="profile-menu-item" id="profile-dark-toggle">
+                  <div style="display: flex; align-items: center;">
+                    <div class="profile-menu-icon"><i data-lucide="moon"></i></div>
+                    <div>
+                      <div style="font-size: 14px; font-weight: 600; color: var(--color-text-primary);">Theme Preference</div>
+                      <div style="font-size: 12px; color: var(--color-text-secondary);">Toggle Dark / Light appearance</div>
+                    </div>
+                  </div>
+                  <i data-lucide="toggle-left" style="color: var(--color-primary-blue); width: 22px; height: 22px;"></i>
+                </div>
+
+                <div class="profile-menu-item" onclick="TG_UTILS.showToast('Payment methods: Visa •••• 4242', 'info')">
+                  <div style="display: flex; align-items: center;">
+                    <div class="profile-menu-icon"><i data-lucide="credit-card"></i></div>
+                    <div>
+                      <div style="font-size: 14px; font-weight: 600; color: var(--color-text-primary);">Payment Methods</div>
+                      <div style="font-size: 12px; color: var(--color-text-secondary);">Cards & demo billing accounts</div>
+                    </div>
+                  </div>
+                  <i data-lucide="chevron-right" style="color: var(--color-text-muted);"></i>
+                </div>
+
+                <div class="profile-menu-item" onclick="tgRouter.navigateTo('screen-notifications')">
+                  <div style="display: flex; align-items: center;">
+                    <div class="profile-menu-icon"><i data-lucide="bell"></i></div>
+                    <div>
+                      <div style="font-size: 14px; font-weight: 600; color: var(--color-text-primary);">Notification Settings</div>
+                      <div style="font-size: 12px; color: var(--color-text-secondary);">Trip alerts & price drops</div>
+                    </div>
+                  </div>
+                  <i data-lucide="chevron-right" style="color: var(--color-text-muted);"></i>
+                </div>
+              </div>
+
+              <button type="button" class="btn btn-secondary btn-block" id="btn-profile-signout" style="color: var(--color-error); border-color: rgba(240,68,56,0.3);">
+                <i data-lucide="log-out"></i> Sign Out
+              </button>
+            </div>
+          </section>
+
+          <!-- ====================================================================
+               SCREEN 14 — FAVORITES
+               ==================================================================== -->
+          <section class="screen-view" id="screen-favorites" aria-label="Favorites Screen">
+            <div class="app-header">
+              <button type="button" class="header-action-btn" data-action="go-back" aria-label="Go back">
+                <i data-lucide="chevron-left"></i>
+              </button>
+              <div>
+                <h2 class="header-title" style="font-size: 16px;">Saved Properties</h2>
+                <div id="fav-count-header" style="font-size: 11px; color: var(--color-text-secondary); text-align: center;">3 Saved</div>
+              </div>
+              <div style="width: 40px;"></div>
+            </div>
+
+            <div class="screen-content has-bottom-nav">
+              <div id="favorites-list-container">
+                <!-- Dynamically populated -->
+              </div>
+            </div>
+          </section>
+
+          <!-- ====================================================================
+               SCREEN 15 — NOTIFICATIONS
+               ==================================================================== -->
+          <section class="screen-view" id="screen-notifications" aria-label="Notifications Screen">
+            <div class="app-header">
+              <button type="button" class="header-action-btn" data-action="go-back" aria-label="Go back">
+                <i data-lucide="chevron-left"></i>
+              </button>
+              <h2 class="header-title">Notifications</h2>
+              <button type="button" class="btn btn-sm btn-subtle" id="btn-notifications-mark-read" style="padding: 6px 10px; font-size: 11px;">
+                Mark Read
+              </button>
+            </div>
+
+            <div class="screen-content">
+              <div id="notifications-list-container">
+                <!-- Dynamically populated -->
+              </div>
+            </div>
+          </section>
+
+          <!-- ====================================================================
+               SCREEN 16 — REVIEW & RATING
+               ==================================================================== -->
+          <section class="screen-view" id="screen-review-rating" aria-label="Review and Rating Screen">
+            <div class="app-header">
+              <button type="button" class="header-action-btn" data-action="go-back" aria-label="Go back">
+                <i data-lucide="chevron-left"></i>
+              </button>
+              <h2 class="header-title">Rate & Review</h2>
+              <div style="width: 40px;"></div>
+            </div>
+
+            <div class="screen-content">
+              <!-- Hotel Summary snippet -->
+              <div style="display: flex; gap: 12px; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 12px; margin-bottom: 20px;">
+                <img id="review-hotel-thumb" src="assets/images/hotel_astra.jpg" style="width: 60px; height: 60px; border-radius: var(--radius-sm); object-fit: cover;" alt="Hotel" />
+                <div style="display: flex; flex-direction: column; justify-content: center;">
+                  <strong id="review-hotel-name" style="font-size: 14px; color: var(--color-text-primary);">Astra Suites Santorini</strong>
+                  <span id="review-hotel-location" style="font-size: 12px; color: var(--color-text-secondary);">Santorini, Greece</span>
+                  <span style="font-size: 11px; color: var(--color-primary-blue); font-weight: 600;">Stayed October 2026</span>
+                </div>
+              </div>
+
+              <!-- Interactive Star Rating Widget -->
+              <div style="text-align: center; margin-bottom: 20px;">
+                <h4 style="font-size: 15px; font-weight: 700; color: var(--color-text-primary); margin-bottom: 8px;">
+                  How was your experience?
+                </h4>
+                <div class="star-rating-widget" id="review-star-selector">
+                  <button type="button" class="star-btn active" data-val="1" aria-label="1 star"><i data-lucide="star"></i></button>
+                  <button type="button" class="star-btn active" data-val="2" aria-label="2 stars"><i data-lucide="star"></i></button>
+                  <button type="button" class="star-btn active" data-val="3" aria-label="3 stars"><i data-lucide="star"></i></button>
+                  <button type="button" class="star-btn active" data-val="4" aria-label="4 stars"><i data-lucide="star"></i></button>
+                  <button type="button" class="star-btn active" data-val="5" aria-label="5 stars"><i data-lucide="star"></i></button>
+                </div>
+                <div id="review-rating-mood" style="font-size: 13px; font-weight: 600; color: #F79009; margin-top: 6px;">
+                  Exceptional Luxury! (5.0)
+                </div>
+              </div>
+
+              <!-- Category breakdown -->
+              <div style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 14px; margin-bottom: 20px;">
+                <h5 style="font-size: 13px; font-weight: 700; color: var(--color-text-primary); margin-bottom: 8px;">Category Ratings</h5>
+                <div class="category-rating-row">
+                  <span class="category-rating-label">Cleanliness & Hygiene</span>
+                  <div class="mini-star-row active">★★★★★</div>
+                </div>
+                <div class="category-rating-row">
+                  <span class="category-rating-label">Service & Staff Hospitality</span>
+                  <div class="mini-star-row active">★★★★★</div>
+                </div>
+                <div class="category-rating-row">
+                  <span class="category-rating-label">Location & Caldera Scenery</span>
+                  <div class="mini-star-row active">★★★★★</div>
+                </div>
+                <div class="category-rating-row">
+                  <span class="category-rating-label">Amenities & Comfort</span>
+                  <div class="mini-star-row active">★★★★★</div>
+                </div>
+              </div>
+
+              <!-- Review Form -->
+              <form id="review-submission-form" novalidate>
+                <div class="form-group">
+                  <label for="review-title-input" class="form-label">Review Title</label>
+                  <div class="input-wrapper">
+                    <input type="text" id="review-title-input" class="form-input" placeholder="e.g. Unforgettable Caldera sunset views!" value="Unforgettable Caldera sunset views!" required />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="review-comment-input" class="form-label">Detailed Review</label>
+                  <div class="input-wrapper" style="padding: 4px;">
+                    <textarea id="review-comment-input" class="form-input" rows="4" placeholder="Share details of your experience, food, room, staff..." style="resize: none;">The cliffside views from Astra Suites are beyond words. Watching the Santorini sunset from our heated plunge pool was the highlight of our entire Greece vacation. Impeccable staff and marvelous breakfast!</textarea>
+                  </div>
+                </div>
+
+                <!-- Photo Upload Simulator -->
+                <div class="form-group">
+                  <label class="form-label">Add Photos (Optional)</label>
+                  <div style="display: flex; gap: 8px;">
+                    <div style="width: 64px; height: 64px; border-radius: var(--radius-sm); border: 2px dashed var(--color-border); display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--color-text-muted); cursor: pointer;" onclick="TG_UTILS.showToast('Photo uploaded to review!', 'info')">
+                      <i data-lucide="camera" style="width: 20px; height: 20px;"></i>
+                      <span style="font-size: 10px; margin-top: 2px;">+ Add</span>
+                    </div>
+                    <img src="assets/images/hotel_astra_2.jpg" style="width: 64px; height: 64px; border-radius: var(--radius-sm); object-fit: cover;" />
+                    <img src="assets/images/room_honeymoon.jpg" style="width: 64px; height: 64px; border-radius: var(--radius-sm); object-fit: cover;" />
+                  </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block btn-lg mt-2">
+                  Submit Review
+                </button>
+              </form>
+            </div>
+
+            <!-- Review Thank You Modal -->
+            <div id="review-thank-you-modal" style="display: none; position: absolute; inset: 0; background: rgba(11,31,58,0.7); backdrop-filter: blur(8px); z-index: 100; align-items: center; justify-content: center; padding: 24px;">
+              <div style="background: var(--color-surface); border-radius: var(--radius-xl); padding: 28px 20px; text-align: center; max-width: 320px; box-shadow: var(--shadow-xl); animation: fadeInScreen 0.3s ease;">
+                <div style="width: 64px; height: 64px; border-radius: 50%; background: var(--color-success-bg); color: var(--color-success); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
+                  <i data-lucide="award" style="width: 36px; height: 36px;"></i>
+                </div>
+                <h3 style="font-size: 20px; font-weight: 800; color: var(--color-text-primary); margin-bottom: 6px;">Thank You!</h3>
+                <p style="font-size: 13px; color: var(--color-text-secondary); margin-bottom: 14px;">
+                  Your review has been verified and published. You just earned:
+                </p>
+                <div class="badge badge-coral" style="font-size: 14px; padding: 8px 16px; margin-bottom: 20px;">
+                  +200 TravelGo Explorer Points 🎉
+                </div>
+                <button type="button" class="btn btn-primary btn-block" id="btn-close-review-modal">
+                  Done & View My Trips
+                </button>
+              </div>
+            </div>
+          </section>
+
+        </div><!-- /.screen-container -->
+      </div><!-- /.app-viewport -->
+
+      <!-- Global Bottom Navigation Bar (Screens 03, 04, 11, 14, 13) -->
+      <nav class="bottom-nav" id="global-bottom-nav" aria-label="Main Navigation" style="display: none;">
+        <button type="button" class="nav-item active" data-target="screen-home" aria-label="Discover">
+          <i data-lucide="compass"></i>
+          <span>Discover</span>
+        </button>
+        <button type="button" class="nav-item" data-target="screen-explore" aria-label="Explore">
+          <i data-lucide="search"></i>
+          <span>Explore</span>
+        </button>
+        <button type="button" class="nav-item" data-target="screen-my-trips" aria-label="My Trips">
+          <i data-lucide="plane"></i>
+          <span>Trips</span>
+        </button>
+        <button type="button" class="nav-item" data-target="screen-favorites" aria-label="Favorites">
+          <i data-lucide="heart"></i>
+          <span>Saved</span>
+        </button>
+        <button type="button" class="nav-item" data-target="screen-profile" aria-label="Profile">
+          <i data-lucide="user"></i>
+          <span>Profile</span>
+        </button>
+      </nav>
+
+      <!-- Simulated iOS Home Indicator Bar -->
+      <div class="device-home-indicator" aria-hidden="true"></div>
+
+      <!-- Toast Notifications Container -->
+      <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+    </main><!-- /.device-frame -->
+
+  </div><!-- /.desktop-wrapper -->
+
+  <!-- JavaScript Modules (Vanilla JS only) -->
+  <script src="js/lucide.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/state.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/router.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>

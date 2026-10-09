@@ -1,0 +1,1035 @@
+/* ==========================================================================
+   TravelGo - Global Styles & 16-Screen Specific Styles
+   ========================================================================== */
+
+/* Utility Typography & Helpers */
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-muted { color: var(--color-text-secondary); }
+.text-primary { color: var(--color-primary-blue); }
+.text-coral { color: var(--color-coral); }
+.font-bold { font-weight: var(--font-weight-bold); }
+.font-semibold { font-weight: var(--font-weight-semibold); }
+.flex-between { display: flex; align-items: center; justify-content: space-between; }
+.flex-align { display: flex; align-items: center; }
+.gap-2 { gap: 8px; }
+.gap-3 { gap: 12px; }
+.gap-4 { gap: 16px; }
+.mt-2 { margin-top: 8px; }
+.mt-3 { margin-top: 12px; }
+.mt-4 { margin-top: 16px; }
+.mt-6 { margin-top: 24px; }
+.mb-2 { margin-bottom: 8px; }
+.mb-3 { margin-bottom: 12px; }
+.mb-4 { margin-bottom: 16px; }
+.mb-6 { margin-bottom: 24px; }
+
+/* Section Headers */
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 22px 0 14px;
+}
+
+.section-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  letter-spacing: -0.3px;
+}
+
+.section-link {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary-blue);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.section-link:hover {
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   Screen 01 - Welcome / Splash
+   ========================================================================== */
+#screen-welcome {
+  position: relative;
+  height: 100%;
+  background: #0B1F3A;
+  color: #FFFFFF;
+}
+
+.welcome-hero-container {
+  position: relative;
+  height: 60%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.welcome-hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.welcome-hero-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(11, 31, 58, 0.2) 0%, rgba(11, 31, 58, 0.6) 60%, #0B1F3A 100%);
+}
+
+.welcome-logo-bar {
+  position: absolute;
+  top: 48px;
+  left: 24px;
+  z-index: 10;
+}
+
+.welcome-logo-img {
+  height: 40px;
+  width: auto;
+}
+
+.welcome-body {
+  position: relative;
+  height: 40%;
+  padding: 0 24px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #0B1F3A;
+  z-index: 5;
+}
+
+.welcome-headline {
+  font-size: 30px;
+  font-weight: var(--font-weight-extrabold);
+  line-height: 1.2;
+  letter-spacing: -0.6px;
+  margin-bottom: 12px;
+  color: #FFFFFF;
+}
+
+.welcome-headline span {
+  background: var(--grad-blue-turquoise);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.welcome-subtext {
+  font-size: var(--font-size-base);
+  color: #98A2B3;
+  line-height: 1.5;
+}
+
+.welcome-dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 16px 0;
+}
+
+.welcome-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.25);
+  transition: all var(--transition-fast);
+}
+
+.welcome-dot.active {
+  width: 24px;
+  background: var(--color-primary-blue);
+}
+
+.welcome-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.welcome-login-link {
+  text-align: center;
+  font-size: var(--font-size-sm);
+  color: #98A2B3;
+}
+
+.welcome-login-link a {
+  color: var(--color-sky-blue);
+  font-weight: var(--font-weight-semibold);
+  margin-left: 4px;
+}
+
+/* ==========================================================================
+   Screen 02 - Login / Sign Up
+   ========================================================================== */
+.auth-header {
+  padding: 30px 24px 10px;
+  text-align: center;
+}
+
+.auth-logo-badge {
+  width: 58px;
+  height: 58px;
+  border-radius: var(--radius-lg);
+  background: var(--grad-navy-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  box-shadow: var(--shadow-md);
+  color: #FFFFFF;
+}
+
+.auth-title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-extrabold);
+  color: var(--color-text-primary);
+  margin-bottom: 6px;
+}
+
+.auth-subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.auth-tabs {
+  display: flex;
+  background: var(--color-surface-subtle);
+  border-radius: var(--radius-md);
+  padding: 4px;
+  margin: 18px 24px 20px;
+}
+
+.auth-tab-btn {
+  flex: 1;
+  padding: 10px;
+  text-align: center;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-secondary);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+
+.auth-tab-btn.active {
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.auth-social-row {
+  display: flex;
+  gap: 12px;
+  margin: 18px 0;
+}
+
+.auth-social-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  transition: all var(--transition-fast);
+}
+
+.auth-social-btn:hover {
+  background: var(--color-surface-subtle);
+}
+
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 16px 0;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--color-border);
+}
+
+.demo-autofill-banner {
+  background: rgba(23, 105, 255, 0.08);
+  border: 1px dashed var(--color-primary-blue);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: var(--font-size-xs);
+  color: var(--color-primary-blue);
+}
+
+.demo-autofill-btn {
+  background: var(--color-primary-blue);
+  color: #fff;
+  border-radius: var(--radius-xs);
+  padding: 4px 10px;
+  font-weight: var(--font-weight-semibold);
+  font-size: 11px;
+}
+
+/* ==========================================================================
+   Screen 03 - Home / Discover
+   ========================================================================== */
+.home-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 44px 20px 16px;
+}
+
+.home-user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.home-avatar-wrap {
+  position: relative;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--color-primary-blue);
+  cursor: pointer;
+}
+
+.home-avatar-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.home-greeting-sub {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+.home-greeting-name {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+}
+
+.home-promo-banner {
+  background: var(--grad-navy-blue);
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+  margin: 16px 0;
+  color: #FFFFFF;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  cursor: pointer;
+}
+
+.home-promo-banner::after {
+  content: '';
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, rgba(32, 201, 195, 0.4) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.home-promo-tag {
+  background: rgba(255, 255, 255, 0.15);
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: var(--radius-xs);
+  font-size: 10px;
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.home-promo-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-extrabold);
+  margin-bottom: 4px;
+}
+
+.home-promo-desc {
+  font-size: var(--font-size-xs);
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 12px;
+}
+
+/* ==========================================================================
+   Screen 04 - Explore / Search Destination
+   ========================================================================== */
+.search-card-box {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-sm);
+}
+
+.search-field-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 4px;
+  border-bottom: 1px solid var(--color-border-subtle);
+  cursor: pointer;
+}
+
+.search-field-row:last-child {
+  border-bottom: none;
+}
+
+.search-field-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  background: rgba(23, 105, 255, 0.08);
+  color: var(--color-primary-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.search-field-info {
+  flex: 1;
+}
+
+.search-field-label {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.3px;
+}
+
+.search-field-value {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 10px 0 20px;
+}
+
+.tag-chip {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  padding: 6px 14px;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.tag-chip:hover {
+  border-color: var(--color-primary-blue);
+  color: var(--color-primary-blue);
+  background: rgba(23, 105, 255, 0.05);
+}
+
+/* ==========================================================================
+   Screen 05 - Search Results
+   ========================================================================== */
+.results-filter-bar {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 8px 0 16px;
+  scrollbar-width: none;
+}
+
+.results-filter-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.filter-chip {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  padding: 6px 14px;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.filter-chip.active {
+  background: #0B1F3A;
+  color: #FFFFFF;
+  border-color: #0B1F3A;
+}
+
+/* ==========================================================================
+   Screen 06 - Hotel Details
+   ========================================================================== */
+.hotel-gallery-wrap {
+  position: relative;
+  width: 100%;
+  height: 280px;
+  overflow: hidden;
+}
+
+.hotel-gallery-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gallery-counter-badge {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  background: rgba(11, 31, 58, 0.75);
+  backdrop-filter: blur(8px);
+  color: #FFFFFF;
+  font-size: var(--font-size-xs);
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-weight: var(--font-weight-semibold);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.hotel-details-header {
+  padding: 16px 20px 8px;
+}
+
+.hotel-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+
+.amenities-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.amenity-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 12px 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  text-align: center;
+}
+
+.amenity-card-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(23, 105, 255, 0.08);
+  color: var(--color-primary-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.amenity-card-name {
+  font-size: 11px;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+}
+
+.mini-map-card {
+  height: 120px;
+  border-radius: var(--radius-md);
+  background: #E8EEF5;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-border);
+  margin: 14px 0;
+}
+
+.map-pin-pulse {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--color-primary-blue);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 0 8px rgba(23, 105, 255, 0.25);
+}
+
+/* ==========================================================================
+   Screen 07 - Room Selection
+   ========================================================================== */
+.room-card {
+  background: var(--color-surface);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: 16px;
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.room-card.selected {
+  border-color: var(--color-primary-blue);
+  box-shadow: 0 0 0 1px var(--color-primary-blue), var(--shadow-md);
+}
+
+.room-card-media {
+  height: 140px;
+  position: relative;
+}
+
+.room-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.room-card-body {
+  padding: 14px 16px;
+}
+
+.room-perks-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 10px 0 14px;
+}
+
+.room-perk-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+.room-perk-item i {
+  color: var(--color-success);
+}
+
+/* ==========================================================================
+   Screen 08 - Traveler Information
+   ========================================================================== */
+.booking-summary-banner {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.booking-summary-thumb {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+}
+
+.booking-summary-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* ==========================================================================
+   Screen 09 - Payment
+   ========================================================================== */
+.payment-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.payment-tab {
+  flex: 1;
+  padding: 12px 8px;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  transition: all var(--transition-fast);
+}
+
+.payment-tab.active {
+  border-color: var(--color-primary-blue);
+  background: rgba(23, 105, 255, 0.05);
+  color: var(--color-primary-blue);
+}
+
+.credit-card-preview {
+  background: linear-gradient(135deg, #0B1F3A 0%, #1769FF 100%);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  color: #FFFFFF;
+  margin-bottom: 20px;
+  box-shadow: 0 12px 28px rgba(11, 31, 58, 0.25);
+  position: relative;
+  overflow: hidden;
+}
+
+.card-chip {
+  width: 36px;
+  height: 26px;
+  background: #E2B93B;
+  border-radius: 4px;
+  margin-bottom: 18px;
+}
+
+.card-num-preview {
+  font-size: 18px;
+  letter-spacing: 2px;
+  font-family: monospace;
+  margin-bottom: 16px;
+}
+
+.card-foot-preview {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   Screen 10 - Booking Confirmation
+   ========================================================================== */
+.confirmation-hero {
+  text-align: center;
+  padding: 24px 0 16px;
+}
+
+.celebrate-icon-box {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: var(--color-success-bg);
+  color: var(--color-success);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  box-shadow: 0 0 0 12px rgba(18, 183, 106, 0.15);
+}
+
+.ref-code-box {
+  background: var(--color-surface);
+  border: 1px dashed var(--color-primary-blue);
+  border-radius: var(--radius-md);
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 16px 0;
+}
+
+.ref-code-text {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary-blue);
+  letter-spacing: 1px;
+}
+
+/* ==========================================================================
+   Screen 11 - My Trips / Bookings
+   ========================================================================== */
+.trips-tabs {
+  display: flex;
+  background: var(--color-surface-subtle);
+  border-radius: var(--radius-md);
+  padding: 4px;
+  margin-bottom: 16px;
+}
+
+.trip-tab-btn {
+  flex: 1;
+  text-align: center;
+  padding: 9px;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-secondary);
+  border-radius: var(--radius-sm);
+}
+
+.trip-tab-btn.active {
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.trip-item-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.trip-item-thumb {
+  height: 130px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.trip-item-body {
+  padding: 14px 16px;
+}
+
+/* ==========================================================================
+   Screen 12 - Trip Details / Itinerary
+   ========================================================================== */
+.itinerary-day-card {
+  position: relative;
+  padding-left: 28px;
+  margin-bottom: 20px;
+}
+
+.itinerary-day-card::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 9px;
+  bottom: -20px;
+  width: 2px;
+  background: var(--color-border);
+}
+
+.itinerary-day-card:last-child::before {
+  display: none;
+}
+
+.itinerary-day-dot {
+  position: absolute;
+  top: 4px;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-primary-blue);
+  color: #fff;
+  font-size: 10px;
+  font-weight: var(--font-weight-bold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 0 3px rgba(23, 105, 255, 0.2);
+}
+
+.itinerary-day-title {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin-bottom: 4px;
+}
+
+.itinerary-day-desc {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   Screen 13 - Profile
+   ========================================================================== */
+.profile-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-sm);
+}
+
+.profile-avatar-wrap {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin: 0 auto 12px;
+  overflow: hidden;
+  border: 3px solid var(--color-primary-blue);
+}
+
+.profile-avatar-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-stats-row {
+  display: flex;
+  justify-content: space-around;
+  border-top: 1px solid var(--color-border-subtle);
+  padding-top: 14px;
+  margin-top: 16px;
+}
+
+.profile-menu-group {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.profile-menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--color-border-subtle);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.profile-menu-item:last-child {
+  border-bottom: none;
+}
+
+.profile-menu-item:hover {
+  background: var(--color-surface-subtle);
+}
+
+.profile-menu-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-sm);
+  background: rgba(23, 105, 255, 0.08);
+  color: var(--color-primary-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+}
+
+/* ==========================================================================
+   Screen 14 - Favorites
+   ========================================================================== */
+.empty-state-box {
+  text-align: center;
+  padding: 60px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.empty-state-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--color-surface-subtle);
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+/* ==========================================================================
+   Screen 15 - Notifications
+   ========================================================================== */
+.notification-item {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  margin-bottom: 10px;
+  display: flex;
+  gap: 12px;
+  cursor: pointer;
+  position: relative;
+  transition: all var(--transition-fast);
+}
+
+.notification-item.unread {
+  border-left: 4px solid var(--color-primary-blue);
+  background: #F4F8FF;
+}
+
+.notification-icon-box {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   Screen 16 - Review & Rating
+   ========================================================================== */
+.category-rating-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.category-rating-label {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.mini-star-row {
+  display: flex;
+  gap: 4px;
+  color: #D0D5DD;
+}
+
+.mini-star-row.active {
+  color: #F79009;
+}

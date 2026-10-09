@@ -1,0 +1,114 @@
+/* ==========================================================================
+   TravelGo - Responsive Design Styles
+   ========================================================================== */
+
+/* Device Mode Toggles on Desktop */
+body.mode-tablet .device-frame {
+  width: 768px;
+  height: 980px;
+  border-radius: 40px;
+}
+
+body.mode-fluid .desktop-wrapper {
+  padding: 0;
+  background: var(--color-bg);
+}
+
+body.mode-fluid .dev-toolbar {
+  max-width: 100%;
+  border-radius: 0;
+  margin-bottom: 0;
+  border-left: none;
+  border-right: none;
+}
+
+body.mode-fluid .device-frame {
+  width: 100%;
+  height: calc(100vh - 60px);
+  border-radius: 0;
+  box-shadow: none;
+  border: none;
+}
+
+body.mode-fluid .device-frame::before,
+body.mode-fluid .dynamic-island {
+  display: none;
+}
+
+/* Native Mobile Screens (320px - 480px) */
+@media screen and (max-width: 480px) {
+  body {
+    background-color: var(--color-bg);
+  }
+
+  .desktop-wrapper {
+    padding: 0;
+    min-height: 100vh;
+    background: var(--color-bg);
+  }
+
+  .desktop-wrapper::before,
+  .desktop-wrapper::after {
+    display: none;
+  }
+
+  .dev-toolbar {
+    display: none; /* Hide dev bar on pure mobile view for native feel */
+  }
+
+  .device-frame {
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+  }
+
+  .device-frame::before,
+  .dynamic-island {
+    display: none; /* Hide hardware simulation on real mobile phones */
+  }
+
+  .device-status-bar {
+    display: none; /* Rely on native phone status bar */
+  }
+
+  .app-header {
+    margin-top: 10px;
+  }
+
+  .screen-content {
+    padding: 0 16px 20px;
+  }
+
+  .welcome-body {
+    padding: 0 20px 28px;
+  }
+}
+
+/* Tablet Screens (481px - 1024px) */
+@media screen and (min-width: 481px) and (max-width: 1024px) {
+  .desktop-wrapper {
+    padding: 16px;
+  }
+
+  .dev-toolbar {
+    max-width: 600px;
+  }
+
+  .device-frame {
+    transform: scale(0.95);
+    transform-origin: top center;
+  }
+}
+
+/* Accessibility: Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

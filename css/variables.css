@@ -1,0 +1,115 @@
+/* ==========================================================================
+   TravelGo - Design System Variables & Tokens
+   ========================================================================== */
+
+:root {
+  /* Brand Core Colors */
+  --color-deep-navy: #0B1F3A;
+  --color-primary-blue: #1769FF;
+  --color-sky-blue: #4DA3FF;
+  --color-turquoise: #20C9C3;
+  --color-coral: #FF7657;
+  --color-coral-light: #FF9A76;
+
+  /* Neutrals & Surfaces */
+  --color-bg: #F7F9FC;
+  --color-surface: #FFFFFF;
+  --color-surface-subtle: #F0F4F8;
+  --color-surface-muted: #E8EEF5;
+
+  /* Text Colors */
+  --color-text-primary: #101828;
+  --color-text-secondary: #667085;
+  --color-text-muted: #98A2B3;
+  --color-text-inverse: #FFFFFF;
+
+  /* Feedback Colors */
+  --color-success: #12B76A;
+  --color-success-bg: #ECFDF3;
+  --color-warning: #F79009;
+  --color-warning-bg: #FFFAEB;
+  --color-error: #F04438;
+  --color-error-bg: #FEF3F2;
+
+  /* Borders & Dividers */
+  --color-border: #E4E7EC;
+  --color-border-subtle: #F2F4F7;
+  --color-border-focus: #1769FF;
+
+  /* Gradients */
+  --grad-navy-blue: linear-gradient(135deg, #0B1F3A 0%, #1769FF 100%);
+  --grad-blue-turquoise: linear-gradient(135deg, #1769FF 0%, #20C9C3 100%);
+  --grad-coral: linear-gradient(135deg, #FF7657 0%, #FF9A76 100%);
+  --grad-dark-overlay: linear-gradient(180deg, rgba(11, 31, 58, 0.1) 0%, rgba(11, 31, 58, 0.85) 100%);
+  --grad-card-overlay: linear-gradient(180deg, rgba(16, 24, 40, 0) 40%, rgba(11, 31, 58, 0.85) 100%);
+  --grad-hero-overlay: linear-gradient(180deg, rgba(11, 31, 58, 0.3) 0%, rgba(11, 31, 58, 0.6) 50%, rgba(11, 31, 58, 0.95) 100%);
+
+  /* Typography */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-size-xs: 0.75rem;     /* 12px */
+  --font-size-sm: 0.8125rem;   /* 13px */
+  --font-size-base: 0.9375rem; /* 15px */
+  --font-size-md: 1rem;        /* 16px */
+  --font-size-lg: 1.125rem;    /* 18px */
+  --font-size-xl: 1.25rem;     /* 20px */
+  --font-size-2xl: 1.5rem;     /* 24px */
+  --font-size-3xl: 1.875rem;   /* 30px */
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(16, 24, 40, 0.05);
+  --shadow-md: 0 4px 12px rgba(16, 24, 40, 0.08);
+  --shadow-lg: 0 10px 25px -4px rgba(16, 24, 40, 0.12), 0 4px 10px -2px rgba(16, 24, 40, 0.05);
+  --shadow-xl: 0 20px 35px -8px rgba(11, 31, 58, 0.18);
+  --shadow-blue-glow: 0 8px 24px rgba(23, 105, 255, 0.28);
+  --shadow-coral-glow: 0 8px 24px rgba(255, 118, 87, 0.32);
+
+  /* Border Radii */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-full: 9999px;
+
+  /* Spacing */
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+  --spacing-4: 16px;
+  --spacing-5: 20px;
+  --spacing-6: 24px;
+  --spacing-8: 32px;
+  --spacing-10: 40px;
+
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 350ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Device Viewport Constraints */
+  --app-width: 390px;
+  --app-height: 844px;
+  --app-header-height: 56px;
+  --app-bottom-nav-height: 72px;
+}
+
+/* Dark Mode Tokens (Optionally toggled in profile/preferences) */
+[data-theme="dark"] {
+  --color-bg: #071324;
+  --color-surface: #0E223D;
+  --color-surface-subtle: #142F52;
+  --color-surface-muted: #1A3A63;
+  --color-text-primary: #F7F9FC;
+  --color-text-secondary: #98A2B3;
+  --color-text-muted: #667085;
+  --color-border: #1E416E;
+  --color-border-subtle: #163255;
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 10px 28px rgba(0, 0, 0, 0.45);
+}
