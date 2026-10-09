@@ -1,7 +1,7 @@
 # TravelGo — Travel and Tourism Booking Web Application
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/ec186785-6183-4eea-9d49-472fceb82744/deploy-status)](https://app.netlify.com/projects/travelgo-booking-demo/deploys)
-[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-brightgreen)](https://mohammedyouse.github.io/TravelGo/)
+[![Version](https://img.shields.io/badge/Version-v1.1.0-blue.svg)](README.md#release-notes)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 > **Explore. Book. Experience.**  
@@ -9,9 +9,10 @@
 
 ---
 
-## 🌐 Live Deployments
+## 🌐 Live Deployment & Repository
 
-- **Live Demo (Netlify):** [Open TravelGo on Netlify](https://travelgo-booking-demo.netlify.app)
+- **Live Demo (Netlify):** [https://travelgo-booking-demo.netlify.app](https://travelgo-booking-demo.netlify.app)
+- **GitHub Repository:** [https://github.com/Mohammedyouse/TravelGo](https://github.com/Mohammedyouse/TravelGo)
 
 ---
 
@@ -181,6 +182,41 @@ npx serve .
 
 - **Netlify Hosting:** Configured with [`netlify.toml`](netlify.toml) with root publishing (`publish = "."`) and single-page application URL rewriting (`/* -> /index.html 200`). Future updates can be deployed by pushing to the `main` branch or running `netlify deploy --prod`.
 - **GitHub Pages:** Enabled on the `main` branch under the root directory (`/`).
+
+---
+
+## 🚀 Release Notes & Changelog
+
+### Version 1.1.0 — Frontend UI Fix — Welcome Screen and Responsive Layout
+*Release Date: October 2026*
+
+#### 🐛 Bug Diagnosis & Root Cause
+- **Issue:** On the initial welcome screen, the lower ~254px portion of the phone viewport rendered as an empty, stark white rectangle beneath the Log In link.
+- **Root Cause:**
+  1. **Flex Height Collapse:** In `css/layout.css`, `.screen-container` had only `min-height: 100%` without explicit flex expansion (`flex: 1; height: 100%`), and `.screen-view` lacked `flex: 1 0 auto; height: 100%`. Under standard CSS flexbox rules, children with percentage heights (`height: 60%` on `.welcome-hero-container` and `height: 40%` on `.welcome-body`) inside an indefinite height container collapsed to `auto` content sizing (~590px instead of the 844px device frame).
+  2. **Unpainted Viewport Underflow:** The unallocated 254px exposed `.app-viewport`'s default light background (`--color-bg: #F7F9FC`), appearing as an unstyled white gap.
+
+#### 🛠️ Solutions Implemented
+- **Full Viewport Flex Architecture (`css/layout.css`):**
+  - Updated `.app-viewport` with `display: flex; flex-direction: column;` ensuring consistent vertical filling.
+  - Set `.screen-container` and `.screen-view` to `min-height: 100%; height: 100%; flex: 1;` so all screen containers expand to fill the available viewport.
+  - Added `.is-welcome-screen` state styling locking `.device-frame`, `.app-viewport`, and `.screen-container` backgrounds to `var(--color-deep-navy)` (`#0B1F3A`).
+  - Styled the iOS home indicator bar (`.device-home-indicator`) to clean translucent white (`rgba(255, 255, 255, 0.65)`) on the welcome screen.
+- **Dynamic Flex Layout for Welcome Screen (`css/global.css`):**
+  - Refactored `#screen-welcome` to flex column with explicit `background: var(--color-deep-navy)`.
+  - Replaced rigid percentage heights with flexible ratios: `.welcome-hero-container` uses `flex: 1 1 54%; min-height: 360px; max-height: 58%;` and `.welcome-body` uses `flex: 1 1 46%; min-height: 330px;`.
+  - Configured `.welcome-actions` with `margin-top: auto;` to anchor the CTA buttons cleanly above the bottom safe area.
+- **Responsive & Safe-Area Synchronization (`css/responsive.css`):**
+  - Expanded mobile media queries to `max-width: 640px` covering all modern mobile viewports (iPhone SE, 13/14/15/16 Pro, Pro Max, Pixel, Galaxy).
+  - Synchronized `body.is-welcome-screen` background to `#0B1F3A` on mobile.
+  - Added `@media screen and (max-height: 720px)` compact viewport handling with optimized typography and spacing.
+- **Zero-Flash State Management (`js/router.js` & `index.html`):**
+  - Initialized `index.html` with `is-welcome-screen` class on `body` and `device-frame` for instant dark rendering on load.
+  - Updated client router `navigateTo()` to dynamically toggle `is-welcome-screen` on entering/leaving `#screen-welcome`.
+
+#### 📱 Verification Across Viewports & All 16 Screens
+- Tested across standard mobile viewports: `320 × 700`, `375 × 812`, `390 × 844`, `430 × 932`, and Desktop browser mode.
+- Confirmed complete deep navy coverage (`#0B1F3A`), smooth gradient blend into the Santorini photography, intact CTA positioning, and flawless navigation across all 16 booking screens.
 
 ---
 

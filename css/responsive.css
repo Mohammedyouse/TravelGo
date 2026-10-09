@@ -35,15 +35,24 @@ body.mode-fluid .dynamic-island {
   display: none;
 }
 
-/* Native Mobile Screens (320px - 480px) */
-@media screen and (max-width: 480px) {
+/* Native Mobile Screens (320px - 640px) */
+@media screen and (max-width: 640px) {
   body {
     background-color: var(--color-bg);
+  }
+
+  body.is-welcome-screen,
+  body.is-welcome-screen .desktop-wrapper,
+  body.is-welcome-screen .device-frame,
+  body.is-welcome-screen .app-viewport,
+  body.is-welcome-screen .screen-container {
+    background-color: var(--color-deep-navy) !important;
   }
 
   .desktop-wrapper {
     padding: 0;
     min-height: 100vh;
+    min-height: 100dvh;
     background: var(--color-bg);
   }
 
@@ -53,7 +62,7 @@ body.mode-fluid .dynamic-island {
   }
 
   .dev-toolbar {
-    display: none; /* Hide dev bar on pure mobile view for native feel */
+    display: none !important; /* Hide dev bar on pure mobile view for native feel */
   }
 
   .device-frame {
@@ -83,12 +92,38 @@ body.mode-fluid .dynamic-island {
   }
 
   .welcome-body {
-    padding: 0 20px 28px;
+    padding: 12px 20px calc(24px + env(safe-area-inset-bottom, 16px));
   }
 }
 
-/* Tablet Screens (481px - 1024px) */
-@media screen and (min-width: 481px) and (max-width: 1024px) {
+/* Compact Mobile Height Adjustments (<= 720px) */
+@media screen and (max-height: 720px) {
+  .welcome-hero-container {
+    min-height: 270px;
+  }
+
+  .welcome-body {
+    min-height: 280px;
+    padding: 8px 18px 20px;
+  }
+
+  .welcome-headline {
+    font-size: 23px;
+    margin-bottom: 6px;
+  }
+
+  .welcome-subtext {
+    font-size: 13px;
+    line-height: 1.35;
+  }
+
+  .welcome-dots {
+    margin: 8px 0 12px;
+  }
+}
+
+/* Tablet Screens (641px - 1024px) */
+@media screen and (min-width: 641px) and (max-width: 1024px) {
   .desktop-wrapper {
     padding: 16px;
   }

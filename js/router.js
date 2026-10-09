@@ -80,14 +80,17 @@ class AppRouter {
       devSelect.value = screenId;
     }
 
-    // Update status bar styling (e.g. for dark hero screens)
+    // Update status bar styling & welcome screen classes
     const statusBar = document.getElementById('device-status-bar');
-    if (statusBar) {
-      if (screenId === 'screen-welcome') {
-        statusBar.classList.add('dark-mode-status');
-      } else {
-        statusBar.classList.remove('dark-mode-status');
-      }
+    const deviceFrame = document.getElementById('device-frame');
+    if (screenId === 'screen-welcome') {
+      if (statusBar) statusBar.classList.add('dark-mode-status');
+      document.body.classList.add('is-welcome-screen');
+      if (deviceFrame) deviceFrame.classList.add('is-welcome-screen');
+    } else {
+      if (statusBar) statusBar.classList.remove('dark-mode-status');
+      document.body.classList.remove('is-welcome-screen');
+      if (deviceFrame) deviceFrame.classList.remove('is-welcome-screen');
     }
 
     // Update Bottom Nav active indicator
