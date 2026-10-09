@@ -1,89 +1,176 @@
-# TravelGo — Travel & Tourism Booking Mobile App (Figma-to-Code)
+# TravelGo — Travel and Tourism Booking Web Application
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/ec186785-6183-4eea-9d49-472fceb82744/deploy-status)](https://app.netlify.com/projects/travelgo-booking-demo/deploys)
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-brightgreen)](https://mohammedyouse.github.io/TravelGo/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 > **Explore. Book. Experience.**  
-> A pixel-perfect, 16-screen luxury travel booking mobile frontend built with pure HTML5, CSS3, and Vanilla JavaScript.
+> A high-fidelity, 16-screen luxury travel and tourism booking mobile web application built with pure HTML5, CSS3, and Vanilla JavaScript.
 
 ---
 
-## 📱 Project Overview
+## 🌐 Live Deployments
 
-TravelGo is a high-fidelity mobile web application designed to deliver an end-to-end luxury travel booking experience. It strictly reproduces the Figma design specification across **16 connected screens**, featuring realistic micro-interactions, responsive mobile/tablet/desktop containers, persistent client state via `localStorage`, and curated photography.
-
----
-
-## 🎨 Brand & Design System
-
-### Color Palette
-- **Deep Navy:** `#0B1F3A`
-- **Primary Blue:** `#1769FF`
-- **Sky Blue:** `#4DA3FF`
-- **Turquoise:** `#20C9C3`
-- **Coral:** `#FF7657`
-- **Background:** `#F7F9FC`
-- **Surface:** `#FFFFFF`
-- **Primary Text:** `#101828`
-- **Secondary Text:** `#667085`
-- **Success:** `#12B76A`
-- **Warning:** `#F79009`
-- **Error:** `#F04438`
-
-### Gradients
-- **Navy to Blue:** `linear-gradient(135deg, #0B1F3A, #1769FF)`
-- **Blue to Turquoise:** `linear-gradient(135deg, #1769FF, #20C9C3)`
-- **Coral Gradient:** `linear-gradient(135deg, #FF7657, #FF9A76)`
-
-### Typography
-- Primary Font: **Inter** (Google Fonts) with system fallbacks (`-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif`).
+- **Live Demo (Netlify):** [Open TravelGo on Netlify](https://travelgo-booking-demo.netlify.app)
+- **Live Demo (GitHub Pages):** [Open TravelGo on GitHub Pages](https://mohammedyouse.github.io/TravelGo/)
+- **GitHub Repository:** [https://github.com/Mohammedyouse/TravelGo](https://github.com/Mohammedyouse/TravelGo)
 
 ---
 
-## 📋 The 16 Implemented Screens
+## 📖 Project Overview
 
-| # | Screen Name | Key Features & Interactions |
-|---|---|---|
-| **01** | **Welcome / Splash** | Full-bleed Santorini caldera hero photography, TravelGo branding mark, headline, subtitle, pagination indicators, and "Get Started" / "Log In" navigation. |
-| **02** | **Login / Sign Up** | Dual-mode tabs (Sign In / Create Account), email & password fields with eye visibility toggle, social auth buttons (Google/Apple), and 1-click **⚡ Quick Demo Autofill**. |
-| **03** | **Home / Discover** | User avatar header, personalized greeting, live unread notification counter, quick destination search trigger, category pills (Hotels, Villas, Resorts, Cruises), Santorini 25% OFF promo card, horizontal destination cards, and luxury hotel cards. |
-| **04** | **Explore / Search** | Destination search input with clear button, interactive travel date & guest picker cards, trending Santorini tags, amenities checkboxes, and "Search Available Stays" CTA. |
-| **05** | **Search Results** | Search query summary chips, sorting chips (Top Rated, Price, 5-Stars, Free Cancellation), hotel cards with high-res photos, star ratings, review counts, amenities, and "Book Now" CTA. |
-| **06** | **Hotel Details** | Hero image gallery with photo counter, back/favorite/share actions, hotel overview with expandable description, 8-item property amenities grid, location card with radar pin, guest reviews snippet, and sticky bottom price + "Select Room" bar. |
-| **07** | **Room Selection** | Progress Stepper (Step 1/3), hotel context, 3 selectable suites (Deluxe Caldera View, Honeymoon Cave Suite, Presidential Villa), included perks, dynamic pricing update, and "Continue to Traveler Info". |
-| **08** | **Traveler Info** | Progress Stepper (Step 2/3), stay summary card, salutation selector, first/last name, email, phone, special requests checkboxes, and validation. |
-| **09** | **Payment** | Progress Stepper (Step 3/3), order breakdown (nights, tax, promo code `TRAVELGO10` with live discount deduction), payment method tabs (Card, Apple Pay, PayPal), realistic card preview with auto-formatted inputs, 1-click **⚡ Autofill Test Card**, and simulated payment processing animation. |
-| **10** | **Booking Confirmation** | Animated celebration checkmark, booking reference code (e.g., `#TG-849201`) with copy-to-clipboard, stay summary, and actions (View in My Trips, View Itinerary, Download E-Ticket, Back to Discover). |
-| **11** | **My Trips / Bookings** | Segmented tabs (Upcoming vs Completed), newly confirmed reservation card with status badges, past completed stays (Bali, Amalfi Coast), and action buttons. |
-| **12** | **Trip Details / Itinerary** | Confirmed reservation hero, check-in / check-out timeline, quick action tools (E-Voucher, Directions, Call Hotel, Message Host), and Day 1 through Day 6 interactive day-by-day activity itinerary. |
-| **13** | **Profile** | User profile card (Alex Morgan), Gold Explorer tier badge, loyalty points counter (4,250 Pts), trip stats, editable menu, theme toggle (Dark / Light mode), and sign-out action. |
-| **14** | **Favorites** | Saved properties grid synchronized across the entire app with heart toggles, real-time un-save with toast notification, and empty state. |
-| **15** | **Notifications** | Notification feed with unread indicators, categories (Bookings, Deals, Reminders), timestamps, click-to-view navigation, and "Mark All as Read" button. |
-| **16** | **Review & Rating** | Stay summary card, interactive 5-star rating widget with dynamic mood response, category breakdown (Cleanliness, Service, Location, Value), review headline & comment textarea, photo upload preview, validation, and celebratory "+200 Points Earned! 🎉" modal. |
+**TravelGo** is a responsive, pixel-perfect travel and tourism booking frontend inspired by modern luxury travel platforms. It delivers a complete, cohesive end-to-end booking journey across 16 interconnected screens. Users can explore trending destinations, search luxury hotels, filter by amenities and pricing, select tailored suites, input traveler details, simulate card checkout with promo vouchers, generate verifiable booking references, explore day-by-day itineraries, manage upcoming/past trips, bookmark favorites, and submit verified reviews.
+
+The application is engineered as a single-page application (SPA) using standard vanilla web technologies without heavyweight frameworks or external build toolchains, ensuring lightning-fast load times and seamless local execution.
 
 ---
 
-## 🛠️ Technology Stack & Architecture
+## ✨ Features Implemented
 
-- **Structure:** HTML5 semantic markup.
-- **Styling:** Modular Vanilla CSS (`variables.css`, `reset.css`, `layout.css`, `components.css`, `global.css`, `responsive.css`).
-- **Icons:** Lucide icons (`lucide.min.js` bundled locally).
-- **Logic & Router:** Pure Vanilla JavaScript (`app.js`, `router.js`, `data.js`, `state.js`, `components.js`, `utils.js`).
-- **State Management:** Fully client-side state synchronized with `localStorage` (Favorites, Demo Bookings, Notification states, Theme).
-- **Zero Frameworks:** No React, Next.js, Vue, Angular, TypeScript, Tailwind, or backend dependencies.
+1. **Welcome / Onboarding Screen (`#screen-welcome`)**:
+   - Hero photography of Santorini caldera sunsets with luxury typography and branding.
+   - Fluid transitions to authentication or direct guest discovery.
+2. **Authentication Demonstration (`#screen-login`)**:
+   - Dual-mode tabs (Sign In & Create Account).
+   - Password visibility toggling, input validation, and 1-click **⚡ Quick Demo Autofill**.
+   - Fictional social authentication buttons (Google, Apple).
+3. **Home & Destination Discovery (`#screen-home`)**:
+   - Personalized user header with avatar, live unread notification counter, and greeting.
+   - Interactive search trigger, category filter pills (*Hotels, Villas, Resorts, Cruises*).
+   - Featured 25% OFF promotional discount banner for Santorini caldera suites.
+   - Horizontal destination carousel (*Santorini, Bali, Amalfi Coast, Kyoto, Maldives, Zermatt*).
+   - Handpicked luxury stay cards with pricing, ratings, and instant favorite toggles.
+4. **Explore & Trip Customizer (`#screen-explore`)**:
+   - Destination search bar with instant clear action.
+   - Travel configuration cards (Check-in/Check-out dates, nights counter, adult & room counter).
+   - Trending search chips (*Oia Caldera, Imerovigli Sunsets, Private Cave Pool*).
+   - Amenity filter checkboxes (*Infinity Pool, Free Breakfast, Free Cancellation*).
+5. **Search Results & Smart Filtering (`#screen-search-results`)**:
+   - Results counter and criteria summary pills.
+   - Sorting chips (*Top Rated, Price: Low to High, 5 Stars Only, Free Cancellation*).
+   - Rich hotel cards featuring high-resolution galleries, location distances, and booking CTAs.
+6. **Hotel Property Details (`#screen-hotel-details`)**:
+   - Hero image gallery with photo pagination counter.
+   - Comprehensive property description with expand/collapse support.
+   - 8-item property amenities grid with Lucide icons.
+   - Stylized interactive location card with pulsing radar pin.
+   - Verified guest review highlights and write-review access.
+   - Sticky bottom action bar with live price per night and suite selection button.
+7. **Room & Package Selection (`#screen-room-selection`)**:
+   - Progress Stepper (Step 1 of 3: Suite).
+   - 3 distinct suite tiers (*Deluxe Caldera View Suite, Honeymoon Cave Suite with Plunge Pool, Presidential Villa*).
+   - Room size, bed configuration, guest capacity, and inclusive perks list.
+   - Dynamic total cost calculator across stay duration.
+8. **Traveler Information Form (`#screen-traveler-info`)**:
+   - Progress Stepper (Step 2 of 3: Traveler).
+   - Reservation summary snippet with selected suite and dates.
+   - Salutation buttons, first/last name, email, and phone fields with required field validation.
+   - Special request toggles (*Late check-in, Quiet caldera room, Airport limousine shuttle*).
+9. **Secure Payment Checkout (`#screen-payment`)**:
+   - Progress Stepper (Step 3 of 3: Payment).
+   - Itemized cost breakdown (Subtotal, 12% VAT/Tourism tax, Promo deduction).
+   - Promo voucher coupon field (Applying `TRAVELGO10` grants an instant discount).
+   - Payment method switcher (*Credit/Debit Card, Apple Pay, PayPal*).
+   - Live stylized credit card graphic with auto-formatting.
+   - **⚡ Autofill Test Card** button and simulated processing loading animation.
+10. **Booking Confirmation (`#screen-confirmation`)**:
+    - Animated green celebration checkmark circle.
+    - Unique generated booking reference code (e.g., `#TG-849201`) with copy-to-clipboard.
+    - Comprehensive stay confirmation card.
+    - Direct actions: View in My Trips, View Detailed Itinerary, and Download E-Ticket.
+11. **My Trips & Bookings Management (`#screen-my-trips`)**:
+    - Segmented tabs (*Upcoming* vs *Completed*).
+    - Real-time display of newly confirmed bookings alongside realistic past completed trips (*Bali & Amalfi Coast*).
+    - Voucher download and review creation triggers.
+12. **Trip Details & Day-by-Day Itinerary (`#screen-trip-details`)**:
+    - Confirmed booking header with reference badge.
+    - Quick actions: E-Voucher, Directions, Call Hotel Concierge, Message Host.
+    - Check-in and check-out time indicators.
+    - Interactive 6-day itinerary schedule with timestamps, titles, and activity descriptions.
+13. **User Profile & Account Center (`#screen-profile`)**:
+    - User avatar, name, email, Gold Explorer tier badge, and 4,250 loyalty points.
+    - Statistics counter (Trips, Reviews, Saved).
+    - Interactive Dark Mode / Light Mode appearance toggle.
+    - Menu for preferences, payment methods, security, and sign-out.
+14. **Favorites / Saved Stays (`#screen-favorites`)**:
+    - Synchronized saved properties list reacting to heart buttons across the app.
+    - Instant removal with undo toast notification.
+    - Empty state view when no properties are bookmarked.
+15. **Notifications Center (`#screen-notifications`)**:
+    - Categorized notifications (*Bookings, Reminders, Deals*).
+    - Read/unread visual state indicators and timestamp badges.
+    - 1-click "Mark All as Read" action.
+16. **Review & Rating Submission (`#screen-review-rating`)**:
+    - Hotel summary card and stay date indicator.
+    - Interactive 5-star rating selector with dynamic sentiment mood.
+    - Individual category rating bars (*Cleanliness, Service, Location, Value*).
+    - Review headline, multiline feedback textarea, and photo attachment preview simulator.
+    - Celebratory thank-you modal awarding `+200 TravelGo Explorer Points 🎉`.
+17. **Desktop Showcase & Reviewer Tools**:
+    - Centered iPhone 15 Pro device frame (390 × 844 px) on desktop viewports.
+    - Top Dev Toolbar featuring instant 16-screen selector, viewport mode toggles (Mobile 390px, Tablet 768px, Fluid Full-Width), and demo data reset.
+    - Full responsiveness on mobile devices (320px–480px).
 
 ---
 
-## 🚀 How to Run Locally
+## 🛠️ Technology Stack
 
-### Option 1: VS Code Live Server
-1. Open this `HCI` folder in VS Code.
-2. Right-click `index.html` and click **"Open with Live Server"**.
-3. The app will open at `http://localhost:5500` (or `http://127.0.0.1:5500`).
+- **Markup:** HTML5 (Semantic elements, accessible labels, ARIA landmarks)
+- **Styling:** CSS3 (Vanilla design tokens, CSS variables, flexbox, grid, glassmorphism, keyframe animations)
+- **Programming Language:** Vanilla JavaScript (ES6+ modular architecture, hash-based SPA routing)
+- **Iconography:** Lucide Icons (Standalone bundled local script `lucide.min.js`)
+- **Hosting & Deployment:** Netlify (Global CDN & edge routing) and GitHub Pages
+- **Version Control:** Git & GitHub
+
+---
+
+## 📁 Project Structure
+
+```
+HCI/
+├── index.html                  # Main SPA entrypoint containing all 16 screen views
+├── netlify.toml                # Netlify deployment configuration & redirect rules
+├── README.md                   # Comprehensive project documentation
+├── .gitignore                  # Git exclusion rules
+├── css/
+│   ├── variables.css           # Design tokens, color palette, gradients, radii, shadows
+│   ├── reset.css               # Box-sizing & reset styles
+│   ├── layout.css              # Desktop device shell, status bar, screen containers
+│   ├── components.css          # Buttons, hotel/room cards, badges, inputs, stepper, toasts
+│   ├── global.css              # Global typography and screen-specific styling
+│   └── responsive.css          # Mobile (320–480px), tablet, and desktop media queries
+├── js/
+│   ├── data.js                 # Reusable travel dataset (Hotels, suites, itineraries, reviews)
+│   ├── state.js                # Application state management with localStorage persistence
+│   ├── utils.js                # UI helpers, toast notifications, currency & date formatters
+│   ├── router.js               # Hash-based SPA client router with history navigation
+│   ├── components.js           # Dynamic screen renderers and UI event handlers
+│   ├── app.js                  # App initializer, event bindings, real-time clock
+│   └── lucide.min.js           # Local offline Lucide icons library
+└── assets/
+    ├── images/                 # 25 high-resolution travel photos (Hotels, rooms, destinations, avatars)
+    ├── logo/                   # TravelGo brand SVG logos (Color & white variations)
+    └── icons/                  # Application icons
+```
+
+---
+
+## 💻 Running Locally
+
+This project requires no build steps, Node.js installations, or external dependencies.
+
+### Option 1: VS Code Live Server (Recommended)
+1. Open this repository folder in **Visual Studio Code**.
+2. Install the **Live Server** extension if not already installed.
+3. Right-click [`index.html`](index.html) and select **Open with Live Server**.
+4. The application will launch automatically at `http://localhost:5500`.
 
 ### Option 2: Python Static Server
-Run this in PowerShell / Terminal:
+Run the following command from the project root directory:
 ```bash
 python -m http.server 8080
 ```
-Then visit `http://localhost:8080` in your web browser.
+Open `http://localhost:8080` in your web browser.
 
 ### Option 3: Node.js (npx)
 ```bash
@@ -92,14 +179,16 @@ npx serve .
 
 ---
 
-## 💻 Desktop Showcase & Reviewer Tools
+## 🚀 Deployment & Continuous Integration
 
-When viewed on desktop viewports (`> 1024px`), the application includes:
-- **iPhone 15 Pro Device Frame:** Exact 390 × 844 px mobile viewport with bezel, dynamic island, and status bar.
-- **Top Quick Jump Dock:** A floating bar allowing instant jumping to any of the 16 screens directly, toggling between **390px Mobile**, **Tablet (768px)**, and **Fluid Full-Width** modes, and resetting demo data.
-- **Native Mobile Experience:** When viewed on actual mobile devices (`≤ 480px`), the outer frame and dock disappear seamlessly so the app behaves like a native mobile app.
+- **Netlify Hosting:** Configured with [`netlify.toml`](netlify.toml) with root publishing (`publish = "."`) and single-page application URL rewriting (`/* -> /index.html 200`). Future updates can be deployed by pushing to the `main` branch or running `netlify deploy --prod`.
+- **GitHub Pages:** Enabled on the `main` branch under the root directory (`/`).
 
 ---
 
-## 🔒 Demonstration Limitations
-- This is a frontend-only prototype. Authentication, payments, and notifications are simulated locally in JavaScript and stored in non-sensitive `localStorage`. No actual financial transactions or network requests to payment gateways take place.
+## ⚠️ Project Scope & Demonstration Notice
+
+**TravelGo is a frontend-only demonstration project.**
+- Authentication, payment transactions, booking reference generation, favorites, and reviews are simulated purely on the client side using JavaScript and browser `localStorage`.
+- No real financial transactions are executed, and no sensitive payment card data is persisted or transmitted to third-party services.
+- Realistic mock data is used for luxury properties, rooms, destinations, and pricing.
