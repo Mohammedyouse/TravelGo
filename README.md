@@ -12,8 +12,6 @@
 ## 🌐 Live Deployments
 
 - **Live Demo (Netlify):** [Open TravelGo on Netlify](https://travelgo-booking-demo.netlify.app)
-- **Live Demo (GitHub Pages):** [Open TravelGo on GitHub Pages](https://mohammedyouse.github.io/TravelGo/)
-- **GitHub Repository:** [https://github.com/Mohammedyouse/TravelGo](https://github.com/Mohammedyouse/TravelGo)
 
 ---
 
