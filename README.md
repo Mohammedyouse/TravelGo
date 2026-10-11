@@ -1,7 +1,7 @@
 # TravelGo — Travel and Tourism Booking Web Application
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/ec186785-6183-4eea-9d49-472fceb82744/deploy-status)](https://app.netlify.com/projects/travelgo-booking-demo/deploys)
-[![Version](https://img.shields.io/badge/Version-v1.1.0-blue.svg)](README.md#release-notes)
+[![Version](https://img.shields.io/badge/Version-v1.2.0-blue.svg)](README.md#release-notes)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 > **Explore. Book. Experience.**  
@@ -9,10 +9,11 @@
 
 ---
 
-## 🌐 Live Deployment & Repository
+## 🌐 Live Demo & Repository
 
-- **Live Demo (Netlify):** [https://travelgo-booking-demo.netlify.app](https://travelgo-booking-demo.netlify.app)
-- **GitHub Repository:** [https://github.com/Mohammedyouse/TravelGo](https://github.com/Mohammedyouse/TravelGo)
+> 🚀 **Live Production Demo (Netlify):** [https://travelgo-booking-demo.netlify.app](https://travelgo-booking-demo.netlify.app/)  
+> 🔗 **GitHub Repository:** [https://github.com/Mohammedyouse/TravelGo](https://github.com/Mohammedyouse/TravelGo)  
+> 🌐 **Alternate Mirror (GitHub Pages):** [https://mohammedyouse.github.io/TravelGo/](https://mohammedyouse.github.io/TravelGo/)
 
 ---
 
@@ -186,6 +187,33 @@ npx serve .
 ---
 
 ## 🚀 Release Notes & Changelog
+
+### Version 1.2.0 — End-to-End User Journeys, Authentication, and Personalization Updates
+*Release Date: October 2026*
+
+#### 🎯 Key Features & Usability Enhancements
+- **16-Screen Discrete Navigation & Zero Layout Shifts:**
+  - Resolved screen stacking and vertical underflow issues with strict `display: none` / `display: flex` rules and automatic `scrollTop: 0` resetting across all screen transitions.
+  - Seamless screen router with responsive URL hash updates and hardware back button support.
+- **Client-Side Account Registration & Authentication:**
+  - Dual-mode authentication (Sign In & Create Account) with real-time field validation.
+  - Safe client-side password hashing using salted SHA-256 (`crypto.subtle`) ensuring credentials are never stored in plaintext.
+  - Session isolation and multi-account switching between registered users.
+- **Dynamic Personalized Greetings & User Header:**
+  - Personalized greetings on the Home screen (*"Good morning, 👋 [User Name]"* or *"Welcome back, [First Name]!"*).
+  - Synchronized user profile avatar with direct 1-click navigation to the Profile Center.
+- **Interactive Home Accommodation Category Filters:**
+  - Fully functional accommodation category pills (*All, Hotels, Villas, Resorts*).
+  - Instant live filtering of properties with active filter badges and accessible ARIA attributes.
+- **End-to-End Booking Sequence & Confirmation:**
+  - Suite selection with real-time capacity and price calculation.
+  - Traveler details form with automated session prefill.
+  - Secure payment simulation with promo code verification (`TRAVELGO10` saves $150) and test card autofill.
+  - Confirmation screen with unique reference codes (`#TG-XXXXXX`), 1-click clipboard copy, and personalized traveler acknowledgment.
+- **My Trips, Saved Stays, and Review Feedback:**
+  - Segmented trips view (*Upcoming* vs *Completed* stays) with voucher download simulation and detailed 6-day itinerary timeline.
+  - Wishlist reactivity synchronized across all hotel cards.
+  - Interactive 5-star review submission system with dynamic sentiment moods, category ratings, and celebratory +200 loyalty points award modal.
 
 ### Version 1.1.0 — Frontend UI Fix — Welcome Screen and Responsive Layout
 *Release Date: October 2026*

@@ -3,6 +3,7 @@
    ========================================================================== */
 
 const STORAGE_KEYS = {
+  ACCOUNTS: 'tg_demo_accounts',
   FAVORITES: 'tg_demo_favorites',
   TRIPS: 'tg_demo_trips',
   CURRENT_BOOKING: 'tg_demo_current_booking',
@@ -19,6 +20,20 @@ class StateManager {
   }
 
   initDefaultState() {
+    // Registered Accounts Database (stored safely with cryptographic salts and hashes, never plaintext)
+    this.accounts = this.loadStorage(STORAGE_KEYS.ACCOUNTS, [
+      {
+        name: "Alex Morgan",
+        email: "alex.morgan@travelgo.com",
+        salt: "salt_demo_alex",
+        passwordHash: "4f8ad3107dfbd8fa1e5989d4138b1b34ed4c9f0258456cef7952064774bfba9a",
+        tier: "Gold Explorer 🌟",
+        points: 4250,
+        totalTrips: 12,
+        totalReviews: 8
+      }
+    ]);
+
     // Current Active Hotel & Room selection
     this.selectedHotel = TG_DATA.hotels[0]; // Astra Suites Santorini
     this.selectedRoom = this.selectedHotel.rooms[0]; // Deluxe Caldera Suite
@@ -35,29 +50,29 @@ class StateManager {
       maxPrice: 900
     });
 
-    // Traveler Contact Info
+    // Traveler Contact Info (populated upon authentication or checkout)
     this.traveler = {
       title: "Mr",
-      firstName: "Alex",
-      lastName: "Morgan",
-      email: "alex.morgan@example.com",
+      firstName: "",
+      lastName: "",
+      email: "",
       phone: "+1 (555) 382-9104",
       specialRequests: ["Late check-in requested", "Quiet caldera-facing room"]
     };
 
-    // User Profile
+    // User Profile (unauthenticated guest by default)
     this.user = this.loadStorage(STORAGE_KEYS.USER, {
-      name: "Alex Morgan",
-      email: "alex.morgan@example.com",
-      phone: "+1 (555) 382-9104",
+      name: "",
+      email: "",
+      phone: "",
       avatar: "assets/images/avatar_user.jpg",
-      tier: "Gold Explorer 🌟",
-      points: 4250,
-      totalTrips: 12,
-      totalReviews: 8,
+      tier: "Guest Explorer",
+      points: 0,
+      totalTrips: 0,
+      totalReviews: 0,
       currency: "USD ($)",
       language: "English (US)",
-      isLoggedIn: true
+      isLoggedIn: false
     });
 
     // Favorites (hotel IDs)
@@ -118,8 +133,8 @@ class StateManager {
       totalPrice: 2128,
       status: "Confirmed",
       isPast: false,
-      travelerName: "Alex Morgan",
-      travelerEmail: "alex.morgan@example.com",
+      travelerName: (this.user && this.user.name) ? this.user.name : "Valued Explorer",
+      travelerEmail: (this.user && this.user.email) ? this.user.email : "explorer@travelgo.com",
       bookingDate: "Oct 09, 2026"
     });
 
@@ -261,8 +276,8 @@ class StateManager {
       totalPrice: total,
       status: "Confirmed",
       isPast: false,
-      travelerName: `${this.traveler.firstName} ${this.traveler.lastName}`.trim(),
-      travelerEmail: this.traveler.email,
+      travelerName: `${this.traveler.firstName || ''} ${this.traveler.lastName || ''}`.trim() || (this.user && this.user.name) || "Valued Explorer",
+      travelerEmail: this.traveler.email || (this.user && this.user.email) || "explorer@travelgo.com",
       bookingDate: "Today"
     };
 
@@ -316,6 +331,163 @@ class StateManager {
     this.user.totalReviews += 1;
     this.saveStorage(STORAGE_KEYS.USER, this.user);
     return newRev;
+  }
+
+  // Cryptographic password hashing (non-plaintext)
+  async hashPassword(password, salt) {
+    const str = (salt || '') + ':' + (password || '');
+    if (window.crypto && window.crypto.subtle) {
+      try {
+        const enc = new TextEncoder();
+        const data = enc.encode(str);
+        const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+      } catch (e) {
+        // Fallback
+      }
+    }
+    let h = 0x811c9dc5;
+    for (let i = 0; i < str.length; i++) {
+      h ^= str.charCodeAt(i);
+      h += (h << 1) + (h << 4) + (h << 7) + (h << 8) + (h << 24);
+    }
+    return 'fnv_' + (h >>> 0).toString(16);
+  }
+
+  // User Registration
+  async registerUser(name, email, password) {
+    const cleanEmail = (email || '').trim().toLowerCase();
+    const cleanName = (name || '').trim();
+
+    if (!cleanName) {
+      return { success: false, message: 'Please enter your full name.' };
+    }
+    if (!cleanEmail || !cleanEmail.includes('@')) {
+      return { success: false, message: 'Please enter a valid email address.' };
+    }
+    if (!password || password.length < 6) {
+      return { success: false, message: 'Password must be at least 6 characters.' };
+    }
+
+    const existing = this.accounts.find(a => a.email.toLowerCase() === cleanEmail);
+    if (existing) {
+      return { success: false, message: 'An account with this email already exists. Please sign in.' };
+    }
+
+    const salt = 'salt_' + Math.random().toString(36).substring(2, 10) + Date.now().toString(36);
+    const passwordHash = await this.hashPassword(password, salt);
+
+    const newAccount = {
+      name: cleanName,
+      email: cleanEmail,
+      salt: salt,
+      passwordHash: passwordHash,
+      tier: "Explorer Member ✨",
+      points: 500,
+      totalTrips: 0,
+      totalReviews: 0,
+      createdAt: new Date().toISOString()
+    };
+
+    this.accounts.push(newAccount);
+    this.saveStorage(STORAGE_KEYS.ACCOUNTS, this.accounts);
+
+    this.setCurrentUser(newAccount);
+    return { success: true, user: newAccount, isNew: true };
+  }
+
+  // User Login
+  async loginUser(email, password) {
+    const cleanEmail = (email || '').trim().toLowerCase();
+    if (!cleanEmail || !cleanEmail.includes('@')) {
+      return { success: false, message: 'Please enter a valid email address.' };
+    }
+    if (!password) {
+      return { success: false, message: 'Please enter your password.' };
+    }
+
+    const account = this.accounts.find(a => a.email.toLowerCase() === cleanEmail);
+    if (!account) {
+      return { success: false, message: 'Account not found. Please create an account or verify your email.' };
+    }
+
+    const hash = await this.hashPassword(password, account.salt);
+    if (hash !== account.passwordHash) {
+      return { success: false, message: 'Incorrect password. Please try again.' };
+    }
+
+    this.setCurrentUser(account);
+    return { success: true, user: account, isNew: false };
+  }
+
+  // Update authenticated active user session
+  setCurrentUser(account) {
+    this.user = {
+      name: account.name || '',
+      email: account.email || '',
+      phone: account.phone || '+1 (555) 382-9104',
+      avatar: account.avatar || 'assets/images/avatar_user.jpg',
+      tier: account.tier || 'Explorer Member ✨',
+      points: account.points !== undefined ? account.points : 500,
+      totalTrips: account.totalTrips || 0,
+      totalReviews: account.totalReviews || 0,
+      currency: 'USD ($)',
+      language: 'English (US)',
+      isLoggedIn: true
+    };
+    this.saveStorage(STORAGE_KEYS.USER, this.user);
+
+    // Sync traveler details
+    const nameParts = (account.name || '').trim().split(/\s+/);
+    this.traveler = {
+      ...this.traveler,
+      firstName: nameParts[0] || (account.name || 'Traveler'),
+      lastName: nameParts.slice(1).join(' ') || '',
+      email: account.email
+    };
+  }
+
+  // Sign out user session
+  logoutUser() {
+    this.user = {
+      name: '',
+      email: '',
+      phone: '',
+      avatar: 'assets/images/avatar_user.jpg',
+      tier: 'Guest Explorer',
+      points: 0,
+      totalTrips: 0,
+      totalReviews: 0,
+      currency: 'USD ($)',
+      language: 'English (US)',
+      isLoggedIn: false
+    };
+    this.traveler = {
+      title: 'Mr',
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      specialRequests: []
+    };
+    this.saveStorage(STORAGE_KEYS.USER, this.user);
+  }
+
+  // Personalized greeting generator with neutral fallback
+  getWelcomeMessage(isNew = false) {
+    const rawName = (this.user && this.user.name) ? this.user.name.trim() : '';
+    if (!rawName) {
+      return 'Welcome back!';
+    }
+    const firstName = rawName.split(/\s+/)[0];
+    if (!firstName) {
+      return 'Welcome back!';
+    }
+    if (isNew) {
+      return `Welcome, ${firstName}!`;
+    }
+    return `Welcome back, ${firstName}!`;
   }
 
   resetDemoData() {

@@ -30,7 +30,14 @@ class AppRouter {
     // Listen for hash changes
     window.addEventListener('hashchange', () => {
       const hash = window.location.hash.replace('#', '');
-      if (this.screens.includes(hash)) {
+      if (this.screens.includes(hash) && this.currentScreen !== hash) {
+        this.navigateTo(hash, false);
+      }
+    });
+
+    window.addEventListener('popstate', () => {
+      const hash = window.location.hash.replace('#', '');
+      if (this.screens.includes(hash) && this.currentScreen !== hash) {
         this.navigateTo(hash, false);
       }
     });
@@ -64,15 +71,22 @@ class AppRouter {
     if (targetEl) {
       targetEl.classList.add('active');
       
-      // Scroll app viewport to top
+      // Scroll app viewport and window to top
       const viewport = document.getElementById('app-viewport');
       if (viewport) {
         viewport.scrollTop = 0;
       }
+      window.scrollTo(0, 0);
     }
 
-    // Update URL hash
-    window.location.hash = screenId;
+    // Update URL hash cleanly
+    if (window.location.hash !== '#' + screenId) {
+      if (window.history && window.history.replaceState) {
+        window.history.replaceState(null, '', '#' + screenId);
+      } else {
+        window.location.hash = screenId;
+      }
+    }
 
     // Update Dev screen dropdown if present
     const devSelect = document.getElementById('dev-screen-select');
@@ -97,7 +111,9 @@ class AppRouter {
     this.updateBottomNav(screenId);
 
     // Call screen-specific render logic
-    if (window.TG_COMPONENTS && typeof window.TG_COMPONENTS.renderScreen === 'function') {
+    if (typeof TG_COMPONENTS !== 'undefined' && typeof TG_COMPONENTS.renderScreen === 'function') {
+      TG_COMPONENTS.renderScreen(screenId);
+    } else if (window.TG_COMPONENTS && typeof window.TG_COMPONENTS.renderScreen === 'function') {
       window.TG_COMPONENTS.renderScreen(screenId);
     }
 

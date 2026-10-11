@@ -128,24 +128,46 @@ function setupScreenListeners() {
   const tabSignUp = document.getElementById('tab-auth-signup');
   const authTitle = document.getElementById('auth-title-text');
   const authSubmitBtn = document.getElementById('btn-auth-submit');
+  const authNameGroup = document.getElementById('auth-name-group');
+  const authConfirmGroup = document.getElementById('auth-confirm-password-group');
+  const forgotPasswordLink = document.getElementById('auth-forgot-password-link');
+
+  let currentAuthMode = 'signin';
 
   if (tabSignIn && tabSignUp) {
     tabSignIn.addEventListener('click', () => {
+      currentAuthMode = 'signin';
       tabSignIn.classList.add('active');
       tabSignUp.classList.remove('active');
       if (authTitle) authTitle.textContent = 'Welcome Back 👋';
       if (authSubmitBtn) authSubmitBtn.textContent = 'Sign In';
+      if (authNameGroup) authNameGroup.style.display = 'none';
+      if (authConfirmGroup) authConfirmGroup.style.display = 'none';
+      if (forgotPasswordLink) forgotPasswordLink.style.display = 'block';
+      const autofillBanner = document.querySelector('.demo-autofill-banner');
+      if (autofillBanner) autofillBanner.style.display = 'flex';
     });
 
     tabSignUp.addEventListener('click', () => {
+      currentAuthMode = 'signup';
       tabSignUp.classList.add('active');
       tabSignIn.classList.remove('active');
       if (authTitle) authTitle.textContent = 'Create Account 🚀';
       if (authSubmitBtn) authSubmitBtn.textContent = 'Create Account';
+      if (authNameGroup) {
+        authNameGroup.style.display = 'block';
+        const nameIn = document.getElementById('auth-name-input');
+        if (nameIn) nameIn.focus();
+      }
+      if (authConfirmGroup) authConfirmGroup.style.display = 'block';
+      if (forgotPasswordLink) forgotPasswordLink.style.display = 'none';
+      const autofillBanner = document.querySelector('.demo-autofill-banner');
+      if (autofillBanner) autofillBanner.style.display = 'none';
+      TG_UTILS.refreshIcons();
     });
   }
 
-  // Password visibility toggle
+  // Password visibility toggle (Password)
   const togglePassBtn = document.getElementById('toggle-password-visibility');
   const passInput = document.getElementById('auth-password-input');
   if (togglePassBtn && passInput) {
@@ -157,45 +179,125 @@ function setupScreenListeners() {
     });
   }
 
+  // Password visibility toggle (Confirm Password)
+  const toggleConfirmPassBtn = document.getElementById('toggle-confirm-password-visibility');
+  const confirmPassInput = document.getElementById('auth-confirm-password-input');
+  if (toggleConfirmPassBtn && confirmPassInput) {
+    toggleConfirmPassBtn.addEventListener('click', () => {
+      const isPass = confirmPassInput.type === 'password';
+      confirmPassInput.type = isPass ? 'text' : 'password';
+      toggleConfirmPassBtn.innerHTML = isPass ? '<i data-lucide="eye-off"></i>' : '<i data-lucide="eye"></i>';
+      TG_UTILS.refreshIcons();
+    });
+  }
+
+  // Forgot Password handler
+  if (forgotPasswordLink) {
+    forgotPasswordLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      TG_UTILS.showToast('Password recovery is disabled in offline prototype mode.', 'info');
+    });
+  }
+
   // Autofill demo login
   const btnAutofillLogin = document.getElementById('btn-autofill-login');
   if (btnAutofillLogin) {
     btnAutofillLogin.addEventListener('click', () => {
       const emailIn = document.getElementById('auth-email-input');
       const passIn = document.getElementById('auth-password-input');
+      const nameIn = document.getElementById('auth-name-input');
       if (emailIn) emailIn.value = 'alex.morgan@travelgo.com';
       if (passIn) passIn.value = 'DemoPass2026!';
-      TG_UTILS.showToast('Demo credentials filled!', 'success');
+      if (nameIn) nameIn.value = 'Alex Morgan';
+      TG_UTILS.showToast('Demo credentials filled! Click Sign In to continue.', 'info');
     });
   }
 
-  // Submit Login
+  // Submit Login or Create Account
   const authForm = document.getElementById('auth-login-form');
   if (authForm) {
-    authForm.addEventListener('submit', (e) => {
+    authForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const emailIn = document.getElementById('auth-email-input');
       const passIn = document.getElementById('auth-password-input');
+      const nameIn = document.getElementById('auth-name-input');
+      const confirmIn = document.getElementById('auth-confirm-password-input');
 
-      if (!emailIn.value || !emailIn.value.includes('@')) {
-        TG_UTILS.showToast('Please enter a valid email address', 'error');
-        return;
-      }
-      if (!passIn.value || passIn.value.length < 6) {
-        TG_UTILS.showToast('Password must be at least 6 characters', 'error');
-        return;
-      }
+      const email = emailIn ? emailIn.value.trim() : '';
+      const pass = passIn ? passIn.value : '';
+      const name = nameIn ? nameIn.value.trim() : '';
+      const confirmPass = confirmIn ? confirmIn.value : '';
 
-      TG_UTILS.showToast('Welcome back, Alex!', 'success');
-      tgRouter.navigateTo('screen-home');
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (currentAuthMode === 'signup') {
+        if (!name) {
+          TG_UTILS.showToast('Please enter your full name', 'error');
+          if (nameIn) nameIn.focus();
+          return;
+        }
+        if (!email || !emailRegex.test(email)) {
+          TG_UTILS.showToast('Please enter a valid email address', 'error');
+          if (emailIn) emailIn.focus();
+          return;
+        }
+        if (!pass || pass.length < 6) {
+          TG_UTILS.showToast('Password must be at least 6 characters', 'error');
+          if (passIn) passIn.focus();
+          return;
+        }
+        if (!confirmPass) {
+          TG_UTILS.showToast('Please confirm your password', 'error');
+          if (confirmIn) confirmIn.focus();
+          return;
+        }
+        if (pass !== confirmPass) {
+          TG_UTILS.showToast('Passwords do not match. Please re-enter.', 'error');
+          if (confirmIn) confirmIn.focus();
+          return;
+        }
+
+        const res = await tgState.registerUser(name, email, pass);
+        if (!res.success) {
+          TG_UTILS.showToast(res.message, 'error');
+          return;
+        }
+
+        const firstName = name.split(/\s+/)[0];
+        TG_UTILS.showToast(`Account created! Welcome, ${firstName}!`, 'success');
+        tgRouter.navigateTo('screen-home');
+      } else {
+        // Sign In mode
+        if (!email || !emailRegex.test(email)) {
+          TG_UTILS.showToast('Please enter a valid email address', 'error');
+          if (emailIn) emailIn.focus();
+          return;
+        }
+        if (!pass) {
+          TG_UTILS.showToast('Please enter your password', 'error');
+          if (passIn) passIn.focus();
+          return;
+        }
+
+        const res = await tgState.loginUser(email, pass);
+        if (!res.success) {
+          TG_UTILS.showToast(res.message, 'error');
+          return;
+        }
+
+        const savedName = (tgState.user && tgState.user.name) ? tgState.user.name.trim() : '';
+        const firstName = savedName ? savedName.split(/\s+/)[0] : '';
+        const welcomeMsg = firstName ? `Welcome back, ${firstName}!` : 'Welcome back!';
+        TG_UTILS.showToast(welcomeMsg, 'success');
+        tgRouter.navigateTo('screen-home');
+      }
     });
   }
 
-  // Social Login buttons
+  // Social Login buttons — honestly report prototype status
   document.querySelectorAll('.auth-social-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      TG_UTILS.showToast('Signed in with Google/Apple demo session', 'success');
-      tgRouter.navigateTo('screen-home');
+      TG_UTILS.showToast('Social OAuth is disabled in prototype mode. Please sign in with email.', 'info');
     });
   });
 
@@ -207,17 +309,24 @@ function setupScreenListeners() {
     });
   }
 
-  const homeNotifBtn = document.getElementById('home-notif-btn');
-  if (homeNotifBtn) {
-    homeNotifBtn.addEventListener('click', () => {
-      tgRouter.navigateTo('screen-notifications');
-    });
-  }
-
   const homeAvatarBtn = document.getElementById('home-avatar-btn');
   if (homeAvatarBtn) {
     homeAvatarBtn.addEventListener('click', () => {
       tgRouter.navigateTo('screen-profile');
+    });
+  }
+
+  const homeUserInfoBtn = document.getElementById('home-user-info-btn');
+  if (homeUserInfoBtn) {
+    homeUserInfoBtn.addEventListener('click', () => {
+      tgRouter.navigateTo('screen-profile');
+    });
+  }
+
+  const homeNotifBtn = document.getElementById('home-notif-btn');
+  if (homeNotifBtn) {
+    homeNotifBtn.addEventListener('click', () => {
+      tgRouter.navigateTo('screen-notifications');
     });
   }
 
@@ -229,13 +338,19 @@ function setupScreenListeners() {
     });
   }
 
-  // Category Pills filter
+  // Working Category Pills filter on Home Screen
   document.querySelectorAll('#home-category-pills .category-pill').forEach(pill => {
-    pill.addEventListener('click', () => {
-      document.querySelectorAll('#home-category-pills .category-pill').forEach(p => p.classList.remove('active'));
-      pill.classList.add('active');
-      const category = pill.getAttribute('data-cat');
-      TG_UTILS.showToast(`Filtered by ${category}`, 'info');
+    const handleCategorySelect = () => {
+      const category = pill.getAttribute('data-cat') || 'all';
+      TG_COMPONENTS.setHomeCategory(category);
+    };
+
+    pill.addEventListener('click', handleCategorySelect);
+    pill.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        handleCategorySelect();
+      }
     });
   });
 
@@ -268,6 +383,7 @@ function setupScreenListeners() {
       document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
       chip.classList.add('active');
       const sortType = chip.getAttribute('data-sort');
+      TG_COMPONENTS.renderSearchResults(sortType);
       TG_UTILS.showToast(`Sorted by: ${chip.textContent.trim()}`, 'info');
     });
   });
@@ -393,6 +509,7 @@ function setupScreenListeners() {
   if (btnSignOut) {
     btnSignOut.addEventListener('click', () => {
       if (confirm('Are you sure you want to sign out of TravelGo?')) {
+        tgState.logoutUser();
         TG_UTILS.showToast('You have signed out', 'info');
         tgRouter.navigateTo('screen-welcome');
       }
@@ -459,7 +576,11 @@ function setupPaymentScreen() {
       const cvvIn = document.getElementById('pay-card-cvv');
 
       if (numIn) numIn.value = '4242 4242 4242 4242';
-      if (nameIn) nameIn.value = 'Alex Morgan';
+      if (nameIn) {
+        const uName = (tgState.user && tgState.user.name && tgState.user.name.trim()) ? tgState.user.name.trim() : '';
+        const tName = (tgState.traveler && tgState.traveler.firstName) ? `${tgState.traveler.firstName} ${tgState.traveler.lastName || ''}`.trim() : '';
+        nameIn.value = uName || tName || 'Alex Morgan';
+      }
       if (expIn) expIn.value = '10/28';
       if (cvvIn) cvvIn.value = '849';
 

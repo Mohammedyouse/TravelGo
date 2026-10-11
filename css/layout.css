@@ -305,6 +305,11 @@
   opacity: 1;
 }
 
+.screen-view:not(.active),
+#screen-welcome:not(.active) {
+  display: none !important;
+}
+
 /* Welcome Screen Theme Synchronizer */
 .device-frame.is-welcome-screen,
 .is-welcome-screen .app-viewport,

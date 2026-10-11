@@ -70,6 +70,8 @@ const TG_DATA = {
     {
       id: "hotel-astra",
       name: "Astra Suites Santorini",
+      category: "hotels",
+      categoryLabel: "Boutique Hotel",
       destination: "Santorini, Greece",
       locationDetail: "Imerovigli • 0.3 km from Caldera cliff path",
       rating: 4.9,
@@ -118,7 +120,7 @@ const TG_DATA = {
             "Private heated volcanic plunge pool",
             "Welcome champagne & fresh fruit basket",
             "Signature cliffside breakfast served on terrace",
-            "Complimentary airport private limousine transfer"
+            "Complimentary airport limousine transfer"
           ]
         },
         {
@@ -140,11 +142,13 @@ const TG_DATA = {
     {
       id: "hotel-canaves",
       name: "Canaves Oia Epitome",
+      category: "villas",
+      categoryLabel: "Luxury Villa",
       destination: "Santorini, Greece",
       locationDetail: "Oia • 0.5 km from Ammoudi Bay",
       rating: 5.0,
       reviewsCount: 312,
-      badge: "Superhost",
+      badge: "Superhost Villa",
       pricePerNight: 540,
       images: [
         "assets/images/hotel_canaves.jpg",
@@ -166,13 +170,15 @@ const TG_DATA = {
           capacity: "2 Guests",
           price: 540,
           image: "assets/images/room_honeymoon.jpg",
-          perks: ["Private pool", "Sunset veranda", "Free breakfast"]
+          perks: ["Private pool", "Sunset veranda", "Free breakfast", "Free cancellation"]
         }
       ]
     },
     {
       id: "hotel-grace",
       name: "Grace Hotel Santorini",
+      category: "resorts",
+      categoryLabel: "Cliffside Resort",
       destination: "Santorini, Greece",
       locationDetail: "Imerovigli • Center of Caldera",
       rating: 4.9,
@@ -198,13 +204,83 @@ const TG_DATA = {
           capacity: "2 Guests",
           price: 490,
           image: "assets/images/room_deluxe.jpg",
-          perks: ["Plunge pool", "Champagne breakfast", "Daily treats"]
+          perks: ["Plunge pool", "Champagne breakfast", "Daily treats", "Free cancellation"]
+        }
+      ]
+    },
+    {
+      id: "hotel-bali",
+      name: "The Kayon Jungle Resort",
+      category: "resorts",
+      categoryLabel: "Jungle Resort",
+      destination: "Ubud, Bali",
+      locationDetail: "Ubud • Valleys & Rainforest",
+      rating: 4.9,
+      reviewsCount: 512,
+      badge: "Top Resort",
+      pricePerNight: 360,
+      images: [
+        "assets/images/hotel_bali.jpg",
+        "assets/images/bali_dest.jpg"
+      ],
+      description: "Immersed in the lush jungle valleys of Ubud, Kayon Jungle Resort offers iconic tiered infinity pools, holistic Serenity Spa treatments, and elevated Indonesian fine dining.",
+      amenities: [
+        { name: "3-Tier Pool", icon: "waves" },
+        { name: "Jungle Spa", icon: "sparkles" },
+        { name: "Free Breakfast", icon: "coffee" },
+        { name: "Yoga Pavilion", icon: "heart" }
+      ],
+      rooms: [
+        {
+          id: "kayon-pool-villa",
+          name: "Kayon Royal Pool Villa",
+          size: "95 m²",
+          capacity: "2 Guests",
+          price: 360,
+          image: "assets/images/room_deluxe.jpg",
+          perks: ["Private infinity pool", "Rainforest valley view", "Floating breakfast", "Free cancellation"]
+        }
+      ]
+    },
+    {
+      id: "hotel-amalfi",
+      name: "Amalfi Cliffside Grand Hotel",
+      category: "hotels",
+      categoryLabel: "Coastal Hotel",
+      destination: "Amalfi Coast, Italy",
+      locationDetail: "Positano • 0.2 km from Marina Grande",
+      rating: 4.9,
+      reviewsCount: 384,
+      badge: "Heritage",
+      pricePerNight: 440,
+      images: [
+        "assets/images/hotel_amalfi.jpg",
+        "assets/images/amalfi_dest.jpg"
+      ],
+      description: "Carved into the dramatic Amalfi coastal cliffs, featuring private lemon groves, saltwater panoramic pools, and Michelin-star Mediterranean dining.",
+      amenities: [
+        { name: "Saltwater Pool", icon: "waves" },
+        { name: "Sea View", icon: "eye" },
+        { name: "Fine Dining", icon: "utensils" },
+        { name: "Private Beach", icon: "sun" }
+      ],
+      rooms: [
+        {
+          id: "amalfi-suite",
+          name: "Panoramic Ocean Suite",
+          size: "60 m²",
+          capacity: "2 Guests",
+          price: 440,
+          image: "assets/images/room_honeymoon.jpg",
+          perks: ["Private terrace over sea", "Free champagne breakfast", "Beach club access"]
         }
       ]
     },
     {
       id: "hotel-mystique",
       name: "Mystique Luxury Collection",
+      category: "resorts",
+      categoryLabel: "Cave Resort",
       destination: "Santorini, Greece",
       locationDetail: "Oia • Caldera Cliffs",
       rating: 4.9,
@@ -226,13 +302,15 @@ const TG_DATA = {
           capacity: "2 Guests",
           price: 420,
           image: "assets/images/room_deluxe.jpg",
-          perks: ["Cave architecture", "Caldera terrace"]
+          perks: ["Cave architecture", "Caldera terrace", "Free cancellation"]
         }
       ]
     },
     {
       id: "hotel-katikies",
       name: "Katikies Santorini",
+      category: "hotels",
+      categoryLabel: "Luxury Hotel",
       destination: "Santorini, Greece",
       locationDetail: "Oia • Caldera Rim",
       rating: 4.8,
@@ -261,6 +339,8 @@ const TG_DATA = {
     {
       id: "hotel-andronis",
       name: "Andronis Luxury Suites",
+      category: "villas",
+      categoryLabel: "Private Villa",
       destination: "Santorini, Greece",
       locationDetail: "Oia • Cliffside Center",
       rating: 4.9,
@@ -281,7 +361,7 @@ const TG_DATA = {
           capacity: "2 Guests",
           price: 510,
           image: "assets/images/room_honeymoon.jpg",
-          perks: ["Hot tub on caldera edge", "Free breakfast"]
+          perks: ["Hot tub on caldera edge", "Free breakfast", "Free cancellation"]
         }
       ]
     }

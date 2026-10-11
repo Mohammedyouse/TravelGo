@@ -161,23 +161,42 @@
               </div>
 
               <form id="auth-login-form" novalidate>
+                <div class="form-group" id="auth-name-group" style="display: none;">
+                  <label for="auth-name-input" class="form-label">Full Name</label>
+                  <div class="input-wrapper has-left-icon">
+                    <span class="input-icon-left"><i data-lucide="user"></i></span>
+                    <input type="text" id="auth-name-input" class="form-input" placeholder="e.g. Mohammed Ali" autocomplete="name" />
+                  </div>
+                </div>
+
                 <div class="form-group">
                   <label for="auth-email-input" class="form-label">Email Address</label>
                   <div class="input-wrapper has-left-icon">
                     <span class="input-icon-left"><i data-lucide="mail"></i></span>
-                    <input type="email" id="auth-email-input" class="form-input" placeholder="alex.morgan@travelgo.com" required />
+                    <input type="email" id="auth-email-input" class="form-input" placeholder="alex.morgan@travelgo.com" required autocomplete="email" />
                   </div>
                 </div>
 
                 <div class="form-group">
                   <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
                     <label for="auth-password-input" class="form-label" style="margin-bottom: 0;">Password</label>
-                    <a href="javascript:void(0)" onclick="TG_UTILS.showToast('Reset email sent to your inbox', 'info')" style="font-size: 12px; color: var(--color-primary-blue); font-weight: 500;">Forgot Password?</a>
+                    <a href="javascript:void(0)" id="auth-forgot-password-link" style="font-size: 12px; color: var(--color-primary-blue); font-weight: 500;">Forgot Password?</a>
                   </div>
                   <div class="input-wrapper has-left-icon has-right-icon">
                     <span class="input-icon-left"><i data-lucide="lock"></i></span>
-                    <input type="password" id="auth-password-input" class="form-input" placeholder="••••••••••••" required />
+                    <input type="password" id="auth-password-input" class="form-input" placeholder="••••••••••••" required autocomplete="current-password" />
                     <button type="button" id="toggle-password-visibility" class="input-icon-right" aria-label="Toggle password visibility">
+                      <i data-lucide="eye"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="form-group" id="auth-confirm-password-group" style="display: none;">
+                  <label for="auth-confirm-password-input" class="form-label">Confirm Password</label>
+                  <div class="input-wrapper has-left-icon has-right-icon">
+                    <span class="input-icon-left"><i data-lucide="lock"></i></span>
+                    <input type="password" id="auth-confirm-password-input" class="form-input" placeholder="••••••••••••" autocomplete="new-password" />
+                    <button type="button" id="toggle-confirm-password-visibility" class="input-icon-right" aria-label="Toggle confirm password visibility">
                       <i data-lucide="eye"></i>
                     </button>
                   </div>
@@ -208,13 +227,13 @@
                ==================================================================== -->
           <section class="screen-view" id="screen-home" aria-label="Home Screen">
             <div class="home-header">
-              <div class="home-user-info">
+              <div class="home-user-info" id="home-user-info-btn" role="button" tabindex="0" aria-label="View Profile">
                 <div class="home-avatar-wrap" id="home-avatar-btn">
-                  <img src="assets/images/avatar_user.jpg" alt="Alex Morgan" />
+                  <img id="home-avatar-img" src="assets/images/avatar_user.jpg" alt="User Profile Avatar" />
                 </div>
                 <div>
-                  <div class="home-greeting-sub">Good morning, 👋</div>
-                  <div class="home-greeting-name">Alex Morgan</div>
+                  <div class="home-greeting-sub" id="home-greeting-sub">Good morning, 👋</div>
+                  <div class="home-greeting-name" id="home-greeting-name">Explorer</div>
                 </div>
               </div>
 
@@ -233,21 +252,18 @@
               </div>
 
               <!-- Category Pills -->
-              <div class="category-pills mt-3" id="home-category-pills">
-                <button type="button" class="category-pill active" data-cat="all">
+              <div class="category-pills mt-3" id="home-category-pills" role="tablist" aria-label="Accommodation category filters">
+                <button type="button" class="category-pill active" data-cat="all" role="tab" aria-selected="true">
                   <i data-lucide="sparkles"></i> All
                 </button>
-                <button type="button" class="category-pill" data-cat="hotels">
+                <button type="button" class="category-pill" data-cat="hotels" role="tab" aria-selected="false">
                   <i data-lucide="building"></i> Hotels
                 </button>
-                <button type="button" class="category-pill" data-cat="villas">
+                <button type="button" class="category-pill" data-cat="villas" role="tab" aria-selected="false">
                   <i data-lucide="home"></i> Villas
                 </button>
-                <button type="button" class="category-pill" data-cat="resorts">
+                <button type="button" class="category-pill" data-cat="resorts" role="tab" aria-selected="false">
                   <i data-lucide="palmtree"></i> Resorts
-                </button>
-                <button type="button" class="category-pill" data-cat="cruises">
-                  <i data-lucide="ship"></i> Cruises
                 </button>
               </div>
 
@@ -822,8 +838,8 @@
                 <h2 style="font-size: 24px; font-weight: 800; color: var(--color-text-primary); margin-bottom: 6px;">
                   Booking Confirmed! 🎉
                 </h2>
-                <p style="font-size: 13px; color: var(--color-text-secondary); max-width: 300px; margin: 0 auto;">
-                  Pack your bags, Alex! Your luxury reservation in Santorini is confirmed.
+                <p style="font-size: 13px; color: var(--color-text-secondary); max-width: 300px; margin: 0 auto;" id="confirm-hero-sub">
+                  Pack your bags! Your luxury reservation is confirmed.
                 </p>
 
                 <!-- Booking Reference Code -->
@@ -858,7 +874,7 @@
                   </div>
                   <div style="display: flex; justify-content: space-between;">
                     <span style="color: var(--color-text-secondary);">Guest:</span>
-                    <strong id="confirm-traveler-name" style="color: var(--color-text-primary);">Alex Morgan</strong>
+                    <strong id="confirm-traveler-name" style="color: var(--color-text-primary);">Traveler</strong>
                   </div>
                   <div style="display: flex; justify-content: space-between; border-top: 1px solid var(--color-border-subtle); padding-top: 10px;">
                     <span style="color: var(--color-text-primary); font-weight: 600;">Amount Paid:</span>
@@ -997,13 +1013,13 @@
               <!-- Profile Card -->
               <div class="profile-card">
                 <div class="profile-avatar-wrap">
-                  <img src="assets/images/avatar_user.jpg" alt="Alex Morgan" />
+                  <img src="assets/images/avatar_user.jpg" alt="User Profile" />
                 </div>
                 <h3 id="profile-name" style="font-size: 18px; font-weight: 800; color: var(--color-text-primary);">
-                  Alex Morgan
+                  Explorer
                 </h3>
                 <div id="profile-email" style="font-size: 13px; color: var(--color-text-secondary); margin-bottom: 8px;">
-                  alex.morgan@example.com
+                  user@travelgo.com
                 </div>
                 <div style="display: flex; justify-content: center; gap: 8px;">
                   <span class="badge badge-primary" id="profile-tier-badge">Gold Explorer 🌟</span>

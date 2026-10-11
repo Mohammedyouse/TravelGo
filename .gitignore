@@ -17,3 +17,9 @@ npm-debug.log*
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# Local Submission Archives & Design Exports
+*.zip
+*.fig
+TravelGo_HCI_Submission/
+

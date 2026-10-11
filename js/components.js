@@ -52,6 +52,27 @@ const TG_COMPONENTS = {
 
   // 03: Home Screen
   renderHome() {
+    // Dynamic Personalized User Greeting
+    const u = tgState.user;
+    const nameEl = document.getElementById('home-greeting-name') || document.querySelector('.home-greeting-name');
+    const subEl = document.getElementById('home-greeting-sub') || document.querySelector('.home-greeting-sub');
+
+    if (nameEl) {
+      nameEl.textContent = (u && u.name && u.name.trim()) ? u.name.trim() : 'Explorer';
+    }
+    if (subEl) {
+      if (u && u.name && u.name.trim()) {
+        subEl.textContent = 'Good morning, 👋';
+      } else {
+        subEl.textContent = 'Welcome back! 👋';
+      }
+    }
+
+    const avatarImg = document.getElementById('home-avatar-img');
+    if (avatarImg) {
+      avatarImg.src = (u && u.avatar) ? u.avatar : 'assets/images/avatar_user.jpg';
+    }
+
     const unreadCount = tgState.notifications.filter(n => !n.read).length;
     const badgeEl = document.getElementById('home-notif-badge');
     if (badgeEl) {
@@ -63,7 +84,7 @@ const TG_COMPONENTS = {
     const destContainer = document.getElementById('home-destinations-list');
     if (destContainer) {
       destContainer.innerHTML = TG_DATA.destinations.map(d => `
-        <div class="dest-card" onclick="TG_COMPONENTS.onSelectDestination('${d.name}')">
+        <div class="dest-card" onclick="TG_COMPONENTS.onSelectDestination('${d.name}')" tabindex="0" role="button" aria-label="Explore ${d.name}, ${d.country}">
           <img src="${d.image}" alt="${d.name}" loading="lazy" />
           <div class="dest-card-overlay">
             <span class="dest-card-title">${d.name}</span>
@@ -73,49 +94,85 @@ const TG_COMPONENTS = {
       `).join('');
     }
 
-    // Render Popular Hotels
+    // Render Category-filtered Accommodations
+    const activeCat = window.currentHomeCategory || 'all';
+    this.renderHomeAccommodations(activeCat);
+  },
+
+  // Renders the accommodations list based on active category filter
+  renderHomeAccommodations(category = 'all') {
     const hotelContainer = document.getElementById('home-popular-hotels');
-    if (hotelContainer) {
-      hotelContainer.innerHTML = TG_DATA.hotels.slice(0, 4).map(hotel => {
-        const isFav = tgState.isFavorite(hotel.id);
-        return `
-          <div class="hotel-card" onclick="TG_COMPONENTS.onSelectHotel('${hotel.id}')">
-            <div class="hotel-card-media">
-              <img src="${hotel.images[0]}" alt="${hotel.name}" loading="lazy" />
-              <span class="badge badge-primary hotel-card-badge">${hotel.badge}</span>
-              <button type="button" class="hotel-card-fav-btn ${isFav ? 'is-favorite' : ''}" 
-                onclick="event.stopPropagation(); TG_COMPONENTS.toggleFavorite('${hotel.id}', this)"
-                aria-label="Save hotel">
-                <i data-lucide="heart"></i>
-              </button>
+    if (!hotelContainer) return;
+
+    let items = TG_DATA.hotels;
+    if (category && category !== 'all') {
+      items = TG_DATA.hotels.filter(h => h.category === category);
+    }
+
+    if (items.length === 0) {
+      hotelContainer.innerHTML = `
+        <div class="empty-state-box" style="padding: 32px 16px; margin: 12px 0; text-align: center;">
+          <div class="empty-state-icon"><i data-lucide="building"></i></div>
+          <h4 style="font-size: 16px; font-weight: 700; margin-bottom: 4px;">No ${category} found</h4>
+          <p style="font-size: 13px; color: var(--color-text-secondary); margin-bottom: 16px;">Try viewing all accommodations or choosing another category.</p>
+          <button type="button" class="btn btn-primary btn-sm" onclick="TG_COMPONENTS.setHomeCategory('all')">View All Stays</button>
+        </div>
+      `;
+      TG_UTILS.refreshIcons();
+      return;
+    }
+
+    hotelContainer.innerHTML = items.map(hotel => {
+      const isFav = tgState.isFavorite(hotel.id);
+      return `
+        <div class="hotel-card" onclick="TG_COMPONENTS.onSelectHotel('${hotel.id}')" tabindex="0" role="button" aria-label="View details for ${hotel.name}">
+          <div class="hotel-card-media">
+            <img src="${hotel.images[0]}" alt="${hotel.name}" loading="lazy" />
+            <span class="badge badge-primary hotel-card-badge">${hotel.badge || hotel.categoryLabel || 'Luxury'}</span>
+            <button type="button" class="hotel-card-fav-btn ${isFav ? 'is-favorite' : ''}" 
+              onclick="event.stopPropagation(); TG_COMPONENTS.toggleFavorite('${hotel.id}', this)"
+              aria-label="Save ${hotel.name}">
+              <i data-lucide="heart"></i>
+            </button>
+          </div>
+          <div class="hotel-card-body">
+            <div class="hotel-card-header">
+              <h4 class="hotel-card-title">${hotel.name}</h4>
+              <div class="badge-rating">
+                <i data-lucide="star"></i>
+                <span>${hotel.rating}</span>
+              </div>
             </div>
-            <div class="hotel-card-body">
-              <div class="hotel-card-header">
-                <h4 class="hotel-card-title">${hotel.name}</h4>
-                <div class="badge-rating">
-                  <i data-lucide="star"></i>
-                  <span>${hotel.rating}</span>
-                </div>
+            <div class="hotel-card-location">
+              <i data-lucide="map-pin"></i>
+              <span>${hotel.locationDetail}</span>
+            </div>
+            <div class="hotel-card-amenities">
+              ${hotel.amenities.slice(0, 3).map(a => `<span class="amenity-tag">${a.name}</span>`).join('')}
+            </div>
+            <div class="hotel-card-footer">
+              <div class="hotel-card-price-wrap">
+                <div class="hotel-card-price">${TG_UTILS.formatPrice(hotel.pricePerNight)} <span>/ night</span></div>
+                <div class="hotel-card-taxes">Includes taxes & fees</div>
               </div>
-              <div class="hotel-card-location">
-                <i data-lucide="map-pin"></i>
-                <span>${hotel.locationDetail}</span>
-              </div>
-              <div class="hotel-card-amenities">
-                ${hotel.amenities.slice(0, 3).map(a => `<span class="amenity-tag">${a.name}</span>`).join('')}
-              </div>
-              <div class="hotel-card-footer">
-                <div class="hotel-card-price-wrap">
-                  <div class="hotel-card-price">${TG_UTILS.formatPrice(hotel.pricePerNight)} <span>/ night</span></div>
-                  <div class="hotel-card-taxes">Includes taxes & fees</div>
-                </div>
-                <button type="button" class="btn btn-sm btn-subtle">View Details</button>
-              </div>
+              <button type="button" class="btn btn-sm btn-subtle">View Details</button>
             </div>
           </div>
-        `;
-      }).join('');
-    }
+        </div>
+      `;
+    }).join('');
+    TG_UTILS.refreshIcons();
+  },
+
+  // Category switcher with accessible states
+  setHomeCategory(category) {
+    window.currentHomeCategory = category;
+    document.querySelectorAll('#home-category-pills .category-pill').forEach(pill => {
+      const isMatch = pill.getAttribute('data-cat') === category;
+      pill.classList.toggle('active', isMatch);
+      pill.setAttribute('aria-selected', isMatch ? 'true' : 'false');
+    });
+    this.renderHomeAccommodations(category);
   },
 
   // 04: Explore Screen
@@ -127,54 +184,98 @@ const TG_COMPONENTS = {
   },
 
   // 05: Search Results Screen
-  renderSearchResults() {
+  renderSearchResults(sortType = 'top-rated') {
+    window.currentResultsSort = sortType;
     const listEl = document.getElementById('search-results-list');
     const countEl = document.getElementById('results-count-text');
-    if (countEl) {
-      countEl.textContent = `${TG_DATA.hotels.length} luxury properties found`;
+    const destHeader = document.querySelector('#screen-search-results .header-title');
+
+    const destination = (tgState.search.destination || '').trim();
+    if (destHeader && destination) {
+      destHeader.textContent = destination;
     }
 
-    if (listEl) {
-      listEl.innerHTML = TG_DATA.hotels.map(hotel => {
-        const isFav = tgState.isFavorite(hotel.id);
-        return `
-          <div class="hotel-card" onclick="TG_COMPONENTS.onSelectHotel('${hotel.id}')">
-            <div class="hotel-card-media">
-              <img src="${hotel.images[0]}" alt="${hotel.name}" loading="lazy" />
-              <span class="badge badge-primary hotel-card-badge">${hotel.badge}</span>
-              <button type="button" class="hotel-card-fav-btn ${isFav ? 'is-favorite' : ''}" 
-                onclick="event.stopPropagation(); TG_COMPONENTS.toggleFavorite('${hotel.id}', this)"
-                aria-label="Save hotel">
-                <i data-lucide="heart"></i>
-              </button>
+    // Filter by destination if specified
+    let items = [...TG_DATA.hotels];
+    if (destination) {
+      const q = destination.toLowerCase().split(',')[0].trim();
+      const matched = items.filter(h => h.destination.toLowerCase().includes(q) || h.name.toLowerCase().includes(q));
+      if (matched.length > 0) {
+        items = matched;
+      }
+    }
+
+    // Apply sort or filter
+    if (sortType === 'price-low') {
+      items.sort((a, b) => a.pricePerNight - b.pricePerNight);
+    } else if (sortType === '5-stars') {
+      items = items.filter(h => h.rating >= 4.9);
+    } else if (sortType === 'free-cancel') {
+      items = items.filter(h => h.rooms.some(r => r.perks.some(p => p.toLowerCase().includes('cancellation'))));
+    } else {
+      // top-rated
+      items.sort((a, b) => b.rating - a.rating);
+    }
+
+    if (countEl) {
+      countEl.textContent = `${items.length} luxury properties found`;
+    }
+
+    if (!listEl) return;
+
+    if (items.length === 0) {
+      listEl.innerHTML = `
+        <div class="empty-state-box" style="padding: 36px 16px; text-align: center;">
+          <div class="empty-state-icon"><i data-lucide="building"></i></div>
+          <h4 style="font-size: 16px; font-weight: 700; margin-bottom: 4px;">No properties matched</h4>
+          <p style="font-size: 13px; color: var(--color-text-secondary); margin-bottom: 16px;">Try adjusting your destination or sort filter.</p>
+          <button type="button" class="btn btn-primary btn-sm" onclick="tgState.search.destination=''; TG_COMPONENTS.renderSearchResults('top-rated')">Show All Properties</button>
+        </div>
+      `;
+      TG_UTILS.refreshIcons();
+      return;
+    }
+
+    listEl.innerHTML = items.map(hotel => {
+      const isFav = tgState.isFavorite(hotel.id);
+      return `
+        <div class="hotel-card" onclick="TG_COMPONENTS.onSelectHotel('${hotel.id}')" tabindex="0" role="button" aria-label="View ${hotel.name}">
+          <div class="hotel-card-media">
+            <img src="${hotel.images[0]}" alt="${hotel.name}" loading="lazy" />
+            <span class="badge badge-primary hotel-card-badge">${hotel.badge || hotel.categoryLabel}</span>
+            <button type="button" class="hotel-card-fav-btn ${isFav ? 'is-favorite' : ''}" 
+              onclick="event.stopPropagation(); TG_COMPONENTS.toggleFavorite('${hotel.id}', this)"
+              aria-label="Save hotel">
+              <i data-lucide="heart"></i>
+            </button>
+          </div>
+          <div class="hotel-card-body">
+            <div class="hotel-card-header">
+              <h4 class="hotel-card-title">${hotel.name}</h4>
+              <div class="badge-rating">
+                <i data-lucide="star"></i>
+                <span>${hotel.rating} (${hotel.reviewsCount})</span>
+              </div>
             </div>
-            <div class="hotel-card-body">
-              <div class="hotel-card-header">
-                <h4 class="hotel-card-title">${hotel.name}</h4>
-                <div class="badge-rating">
-                  <i data-lucide="star"></i>
-                  <span>${hotel.rating} (${hotel.reviewsCount})</span>
-                </div>
+            <div class="hotel-card-location">
+              <i data-lucide="map-pin"></i>
+              <span>${hotel.locationDetail}</span>
+            </div>
+            <div class="hotel-card-amenities">
+              ${hotel.amenities.slice(0, 3).map(a => `<span class="amenity-tag">${a.name}</span>`).join('')}
+            </div>
+            <div class="hotel-card-footer">
+              <div class="hotel-card-price-wrap">
+                <div class="hotel-card-price">${TG_UTILS.formatPrice(hotel.pricePerNight)} <span>/ night</span></div>
+                <div class="hotel-card-taxes">Free cancellation</div>
               </div>
-              <div class="hotel-card-location">
-                <i data-lucide="map-pin"></i>
-                <span>${hotel.locationDetail}</span>
-              </div>
-              <div class="hotel-card-amenities">
-                ${hotel.amenities.slice(0, 3).map(a => `<span class="amenity-tag">${a.name}</span>`).join('')}
-              </div>
-              <div class="hotel-card-footer">
-                <div class="hotel-card-price-wrap">
-                  <div class="hotel-card-price">${TG_UTILS.formatPrice(hotel.pricePerNight)} <span>/ night</span></div>
-                  <div class="hotel-card-taxes">Free cancellation</div>
-                </div>
-                <button type="button" class="btn btn-sm btn-primary">Book Now</button>
-              </div>
+              <button type="button" class="btn btn-sm btn-primary">Book Now</button>
             </div>
           </div>
-        `;
-      }).join('');
-    }
+        </div>
+      `;
+    }).join('');
+    TG_UTILS.refreshIcons();
   },
 
   // 06: Hotel Details Screen
@@ -321,10 +422,10 @@ const TG_COMPONENTS = {
     const email = document.getElementById('input-traveler-email');
     const phone = document.getElementById('input-traveler-phone');
 
-    if (fName && !fName.value) fName.value = tgState.traveler.firstName;
-    if (lName && !lName.value) lName.value = tgState.traveler.lastName;
-    if (email && !email.value) email.value = tgState.traveler.email;
-    if (phone && !phone.value) phone.value = tgState.traveler.phone;
+    if (fName) fName.value = tgState.traveler.firstName || '';
+    if (lName) lName.value = tgState.traveler.lastName || '';
+    if (email) email.value = tgState.traveler.email || '';
+    if (phone) phone.value = tgState.traveler.phone || '+1 (555) 382-9104';
   },
 
   // 09: Payment Screen
@@ -373,7 +474,15 @@ const TG_COMPONENTS = {
     if (totalEl) totalEl.textContent = TG_UTILS.formatPrice(booking.totalPrice);
 
     const guestEl = document.getElementById('confirm-traveler-name');
-    if (guestEl) guestEl.textContent = booking.travelerName || "Alex Morgan";
+    if (guestEl) guestEl.textContent = booking.travelerName || (tgState.user && tgState.user.name) || "Valued Explorer";
+
+    const heroSubEl = document.getElementById('confirm-hero-sub');
+    if (heroSubEl) {
+      const displayName = booking.travelerName || (tgState.user && tgState.user.name) || '';
+      const firstName = displayName.trim().split(/\s+/)[0];
+      const namePart = firstName ? `, ${firstName}` : '';
+      heroSubEl.textContent = `Pack your bags${namePart}! Your luxury reservation in ${booking.destination || 'Santorini'} is confirmed.`;
+    }
   },
 
   // 11: My Trips Screen
@@ -441,7 +550,7 @@ const TG_COMPONENTS = {
               <i data-lucide="calendar" style="width: 13px; height: 13px; display: inline;"></i> ${trip.checkIn} – ${trip.checkOut}
             </div>
             <div style="display: flex; gap: 8px; margin-top: 12px;">
-              <button type="button" class="btn btn-sm btn-primary" style="flex: 1;" onclick="tgRouter.navigateTo('screen-review-rating')">
+              <button type="button" class="btn btn-sm btn-primary" style="flex: 1;" onclick="TG_COMPONENTS.onReviewTrip('${trip.id}')">
                 <i data-lucide="star"></i> Leave Review
               </button>
               <button type="button" class="btn btn-sm btn-secondary" onclick="TG_UTILS.showToast('Booking receipt generated!', 'info')">Receipt</button>
@@ -483,7 +592,7 @@ const TG_COMPONENTS = {
 
   // 13: Profile Screen
   renderProfile() {
-    const u = tgState.user;
+    const u = tgState.user || {};
     const nameEl = document.getElementById('profile-name');
     const emailEl = document.getElementById('profile-email');
     const tierEl = document.getElementById('profile-tier-badge');
@@ -492,12 +601,12 @@ const TG_COMPONENTS = {
     const revCountEl = document.getElementById('profile-reviews-count');
     const favCountEl = document.getElementById('profile-favs-count');
 
-    if (nameEl) nameEl.textContent = u.name;
-    if (emailEl) emailEl.textContent = u.email;
-    if (tierEl) tierEl.textContent = u.tier;
-    if (pointsEl) pointsEl.textContent = `${u.points} Points`;
-    if (tripsCountEl) tripsCountEl.textContent = u.totalTrips;
-    if (revCountEl) revCountEl.textContent = u.totalReviews;
+    if (nameEl) nameEl.textContent = (u.name && u.name.trim()) ? u.name.trim() : 'Guest Explorer';
+    if (emailEl) emailEl.textContent = (u.email && u.email.trim()) ? u.email.trim() : 'Not signed in';
+    if (tierEl) tierEl.textContent = u.tier || 'Guest Explorer';
+    if (pointsEl) pointsEl.textContent = `${u.points !== undefined ? u.points : 0} Points`;
+    if (tripsCountEl) tripsCountEl.textContent = u.totalTrips !== undefined ? u.totalTrips : 0;
+    if (revCountEl) revCountEl.textContent = u.totalReviews !== undefined ? u.totalReviews : 0;
     if (favCountEl) favCountEl.textContent = tgState.favorites.length;
   },
 
@@ -605,6 +714,15 @@ const TG_COMPONENTS = {
     tgRouter.navigateTo('screen-search-results');
   },
 
+  onReviewTrip(tripId) {
+    const trip = tgState.trips.find(t => t.id === tripId);
+    if (trip) {
+      const hotel = TG_DATA.hotels.find(h => h.name.toLowerCase().includes(trip.hotelName.toLowerCase()) || trip.hotelName.toLowerCase().includes(h.name.toLowerCase())) || TG_DATA.hotels[0];
+      tgState.selectedHotel = hotel;
+    }
+    tgRouter.navigateTo('screen-review-rating');
+  },
+
   onSelectHotel(hotelId) {
     tgState.setSelectedHotel(hotelId);
     tgRouter.navigateTo('screen-hotel-details');
@@ -648,3 +766,5 @@ const TG_COMPONENTS = {
     }
   }
 };
+
+window.TG_COMPONENTS = TG_COMPONENTS;
